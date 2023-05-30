@@ -7,7 +7,7 @@ export default function SignInPage() {
     
     <SingInContainer>
      <LoginPage />
-      <Link to="/registrar">
+      <Link to="/singup">
         <StyledH2>Primeira vez? Cadastre-se!</StyledH2>
       </Link>
     </SingInContainer>
