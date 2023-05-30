@@ -3,11 +3,12 @@ import styled from "styled-components"
 
 export default function HomePage() {
   return (
-    <HomeContainer>
-      
-    </HomeContainer>
+   <>
+     <h1>Olá</h1>
+   </>
   )
 }
+
 
 const HomeContainer = styled.div`
   display: flex;
