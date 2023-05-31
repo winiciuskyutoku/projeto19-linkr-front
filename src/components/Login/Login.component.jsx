@@ -2,13 +2,13 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom"
 import { TailSpin } from 'react-loader-spinner'
 import styled from "styled-components";
-
-
+import UserContextHook from "../../hooks/CitiesContext.Hook";
+import axios  from 'axios'
 
 
 export default function LoginPage(){
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    //const {setUser} = useState()
+    const {setUser} = UserContextHook()
     const [email , setEmail] = useState("")
     const [password, setPassword] = useState("")
     const navigate = useNavigate();
@@ -24,24 +24,23 @@ export default function LoginPage(){
         e.preventDefault()
         setBtnClicked(true)
         alert("email validado com sucesso")
-        /*const URL = `${process.env.REACT_APP_RENDER_URL}/login`
+        const URL = `${process.env.REACT_APP_RENDER_URL}/sign-in`
         const body ={email,password}
         const promise= axios.post(URL , body)
         promise.then(res=>{
-            const {token , username} = res.data
-            localStorage.setItem("user" , JSON.stringify({token , username}))
-            const lsUser = JSON.parse(localStorage.getItem("user"))
-  
-         
-          
+
+            setUser([...res.data])
+            const {user_id , username, user_photo} = res.data
+           // localStorage.setItem("user" , JSON.stringify({user_id , username, user_photo}))
+            ///const lsUser = JSON.parse(localStorage.getItem("user"))
+            navigate("/timeline")
         })
 
         promise.catch(err=>{
             alert(err.response.data.message)
             window.location.reload(true)
         })
-        */ 
-        navigate("/timeline")
+        
         }else{
             alert('formato de email inválido!')
             setEmail("")
@@ -52,7 +51,9 @@ export default function LoginPage(){
     }
 
    return (
-    <>
+
+
+    <LoginContainer>
          <form>
          <input 
                         type="email" 
@@ -85,7 +86,7 @@ export default function LoginPage(){
                                 />):('Entrar')
                          }</StyledButton>
       </form>
-    </>
+    </LoginContainer>
    )
 
 
@@ -93,7 +94,12 @@ export default function LoginPage(){
 
 }
 
+const LoginContainer = styled.div `
+    display:flex;
+    flex-direction: column;
+    background-color: #e5e5e5;
 
+`
 const StyledButton = styled.button`
 display:flex;
 flex-direction: column;
