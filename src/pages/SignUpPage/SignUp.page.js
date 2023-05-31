@@ -1,22 +1,22 @@
 import { Link } from "react-router-dom"
-import styled from "styled-components"
 import SingUpPage from "../../components/SingUp.component.jsx"
+import { SignUpContainer, MainContainer, BannerContainer } from "./style.js"
 
-export default function SignUpPage() {
+
+export default function SignUp() {
   return (
-    <SingUpContainer>
-      <SingUpPage/>
-      <Link to="/">
-        Já tem uma conta? Entre agora!
-      </Link>
-    </SingUpContainer>
+    <MainContainer>
+      <BannerContainer>
+        <h1>linkr</h1>
+        <p>save, share and discover
+          the best links on the web</p>
+      </BannerContainer>
+      <SignUpContainer>
+        <SingUpPage />
+        <Link to="/">
+          Já tem uma conta? Entre agora!
+        </Link>
+      </SignUpContainer>
+    </MainContainer>
   )
 }
-
-const SingUpContainer = styled.section`
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`

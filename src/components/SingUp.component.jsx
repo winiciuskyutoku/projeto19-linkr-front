@@ -36,11 +36,13 @@ export default function SingUpPage() {
                     require.catch(err => {
                         setBtnClicked(false)
                         console.log(err.message)
-                        err.response.status.message === 409 && alert("usuario já cadastrado")
+                        {err.response.status.message === 409 && alert("usuario já cadastrado")}
 
                     })
 
-                } catch (err) { console.log(err.message) }
+                } catch (err) { 
+                    console.log(err.message) 
+                }
 
             } else {
                 alert("a senha e a confirmação de senha tem que ser iguais!")
