@@ -8,7 +8,7 @@ import { useState } from "react";
 
 
 function App() {
-  const [user , setUser] = useState("")
+  const [user , setUser] = useState([])
   return (
 
 

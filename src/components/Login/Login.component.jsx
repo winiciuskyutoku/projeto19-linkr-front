@@ -23,14 +23,14 @@ export default function LoginPage(){
        if( emailRegex.test(email)){
         e.preventDefault()
         setBtnClicked(true)
-        alert("email validado com sucesso")
+        
         const URL = `${process.env.REACT_APP_RENDER_URL}/sign-in`
         const body ={email,password}
         const promise= axios.post(URL , body)
         promise.then(res=>{
-
-            setUser([...res.data])
-            const {user_id , username, user_photo} = res.data
+            console.log(res.data)
+           // setUser([...res.data])
+            //const {user_id , username, user_photo} = res.data
            // localStorage.setItem("user" , JSON.stringify({user_id , username, user_photo}))
             ///const lsUser = JSON.parse(localStorage.getItem("user"))
             navigate("/timeline")
@@ -54,7 +54,8 @@ export default function LoginPage(){
 
 
     <LoginContainer>
-         <form>
+    
+         <Form>
          <input 
                         type="email" 
                         value={email}
@@ -85,7 +86,7 @@ export default function LoginPage(){
                                         visible={btnClicked}
                                 />):('Entrar')
                          }</StyledButton>
-      </form>
+      </Form>
     </LoginContainer>
    )
 
@@ -97,13 +98,42 @@ export default function LoginPage(){
 const LoginContainer = styled.div `
     display:flex;
     flex-direction: column;
-    background-color: #e5e5e5;
+    background-color: #333333;
 
 `
 const StyledButton = styled.button`
-display:flex;
-flex-direction: column;
-align-items:center;
-position:relative;
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+    position:relative;
+    width: 80%;
+    height: 65px;
+    font-size:42px;
+    font-weight:bold;
+    color:white;
+    background: #1877F2;
+    border-radius:5px;
 
+
+`
+
+const Form = styled.form`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 13px;
+    input {
+        width: 80%;
+        height: 65px;  
+        border-radius: 6px;
+        box-sizing: border-box;
+        padding: 10px;
+        font-size: 27px;
+    }
+    input::placeholder{
+        color: #ebebeb;
+        font-size: 27px;
+        font-weight: 700;
+    }
 `
