@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import TimelinePage from "./pages/TimelinePage/Timeline.page"
+
+import TimelinePage from "./pages/TimelinePage/Timeline.page.js"
 import SignInPage from "./pages/SignInPage/SignIn.page.js"
 import SignUpPage from "./pages/SignUpPage/SignUp.page.js"
 
@@ -8,7 +9,7 @@ function App() {
     <BrowserRouter>
       <Routes>
               <Route path="/" element={<SignInPage />} exact/>
-              <Route path="/singup" element={<SignUpPage />} />
+              <Route path="/sign-up" element={<SignUpPage />} />
               <Route path="/timeline" element={<TimelinePage />} />
       </Routes>
     </BrowserRouter>
