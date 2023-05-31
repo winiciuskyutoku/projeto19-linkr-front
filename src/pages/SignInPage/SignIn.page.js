@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import { Link } from "react-router-dom"
-import LoginPage from '../components/Login.component.jsx'
+import LoginPage from '../../components/Login.component.jsx'
 export default function SignInPage() {
   return (
     <>

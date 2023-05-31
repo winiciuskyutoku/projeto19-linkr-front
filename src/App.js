@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import TimelinePage from "./pages/Timeline.page.js"
-import SignInPage from "./pages/SignIn.page.js"
-import SignUpPage from "./pages/SignUp.page.js"
+import TimelinePage from "./pages/TimelinePage/Timeline.page"
+import SignInPage from "./pages/SignInPage/SignIn.page.js"
+import SignUpPage from "./pages/SignUpPage/SignUp.page.js"
 
 function App() {
   return (
