@@ -1,7 +1,8 @@
 import { useState } from "react"
 import Header from "../../components/Header/Header"
 import Publish from "./Publish"
-import { TimelineContainer } from "./TimelineStyle"
+import { ContainerContent, StyledH2, TimelineContainer, TitleContainer } from "./TimelineStyle"
+import Hashtags from "./hashtags"
 
 export default function Timeline() {
   //att será usado para atualizar a timeline
@@ -9,7 +10,13 @@ export default function Timeline() {
   return (
     <TimelineContainer>
       <Header />
-      <Publish att={att} setAtt={setAtt}/>
+      <Hashtags />
+      <TitleContainer>
+        <StyledH2>timeline</StyledH2>
+      </TitleContainer>
+      <ContainerContent>
+        <Publish att={att} setAtt={setAtt} />
+      </ContainerContent>
     </TimelineContainer>
   )
 }
