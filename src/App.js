@@ -2,16 +2,22 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import TimelinePage from "./pages/Timeline.page.js"
 import SignInPage from "./pages/SignIn.page.js"
 import SignUpPage from "./pages/SignUp.page.js"
+import { UserContext } from "./context/UserContext.jsx";
+import { useState } from "react";
 
 function App() {
+  const [user , setUser] = useState("")
   return (
-    <BrowserRouter>
-      <Routes>
-              <Route path="/" element={<SignInPage />} exact/>
-              <Route path="/singup" element={<SignUpPage />} />
-              <Route path="/timeline" element={<TimelinePage />} />
-      </Routes>
-    </BrowserRouter>
+
+      <UserContext.Provider value={{user, setUser}}>
+        <BrowserRouter>
+          <Routes>
+                  <Route path="/" element={<SignInPage />} exact/>
+                  <Route path="/singup" element={<SignUpPage />} />
+                  <Route path="/timeline" element={<TimelinePage />} />
+          </Routes>
+        </BrowserRouter>
+    </UserContext.Provider>
   );
 }
 

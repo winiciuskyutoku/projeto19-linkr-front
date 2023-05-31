@@ -21,9 +21,10 @@ const SingInContainer = styled.section`
   height: 100vh;
   max-width:100%;
   display: flex;
-  flex-direction: column;
+  background-color:black;
+  flex-direction: row;
   //justify-content: center;
-  align-items: center;
+  //align-items: center;
 
 `
 
