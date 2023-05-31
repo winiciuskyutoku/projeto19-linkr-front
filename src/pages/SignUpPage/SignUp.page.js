@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 import styled from "styled-components"
-import SingUpPage from "../components/SingUp.component.jsx"
+import SingUpPage from "../../components/SingUp.component.jsx"
 
 export default function SignUpPage() {
   return (
