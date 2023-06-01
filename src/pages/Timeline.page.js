@@ -1,18 +1,15 @@
 import styled from "styled-components"
+import Header from "../components/Header/Header"
 
 
 export default function Timeline() {
   return (
     <>
-    
-    <TimelineContainer>
-     
+      <TimelineContainer>
+        <Header />
         <StyledH2>timeline page</StyledH2>
-      
-    </TimelineContainer>
-
+      </TimelineContainer>
     </>
-  
   )
 }
 
@@ -27,6 +24,5 @@ const TimelineContainer = styled.section`
 `
 
 const StyledH2 = styled.h2`
-
-margin-top:15px;
+  margin-top: 10%;
 `
