@@ -57,10 +57,9 @@ export default function SingUpPage() {
 
     return (
         <>
+
             <Form>
-
                 <input
-
                     type="text"
                     value={userName}
                     placeholder="Nome"
@@ -96,7 +95,6 @@ export default function SingUpPage() {
                     onChange={e => setConfirmPwd(e.target.value)}
                 />
                 <input
-
                     type="url"
                     value={picture}
                     placeholder="Url da foto"
@@ -120,10 +118,9 @@ export default function SingUpPage() {
                             />) : ('Cadastrar')
                     }
                 </StyledButton>
+
             </Form>
-
         </>
-
     )
 }
 
