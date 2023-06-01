@@ -12,7 +12,7 @@ export default function SingUpPage() {
     const [userPassword, setUserPassword] = useState("")
     const [confirmPwd, setConfirmPwd] = useState("")
     const [userName, setUserName] = useState("")
-    const [picture, setPicture] = useState("");
+    const [picture, setPicture] = useState("")
 
     const navigate = useNavigate();
     function registerUser(e) {
@@ -36,11 +36,13 @@ export default function SingUpPage() {
                     require.catch(err => {
                         setBtnClicked(false)
                         console.log(err.message)
-                        err.response.status.message === 409 && alert("usuario já cadastrado")
+                        {err.response.status.message === 409 && alert("usuario já cadastrado")}
 
                     })
 
-                } catch (err) { console.log(err.message) }
+                } catch (err) { 
+                    console.log(err.message) 
+                }
 
             } else {
                 alert("a senha e a confirmação de senha tem que ser iguais!")
@@ -55,10 +57,9 @@ export default function SingUpPage() {
 
     return (
         <>
-            <form>
 
+            <Form>
                 <input
-
                     type="text"
                     value={userName}
                     placeholder="Nome"
@@ -94,9 +95,9 @@ export default function SingUpPage() {
                     onChange={e => setConfirmPwd(e.target.value)}
                 />
                 <input
-                    type="text"
+                    type="url"
                     value={picture}
-                    placeholder="Insira o link da sua imagem"
+                    placeholder="Url da foto"
                     disabled={btnClicked}
                     required
                     onChange={e => setPicture(e.target.value)}
@@ -117,17 +118,46 @@ export default function SingUpPage() {
                             />) : ('Cadastrar')
                     }
                 </StyledButton>
-            </form>
 
+            </Form>
         </>
-
     )
 }
 
 
 const StyledButton = styled.button`
-         display:flex;
-        flex-direction: column;
-        align-items:center;
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+    justify-content: center;
+    width: 80%;
+    height: 65px;
+    box-sizing: border-box;
+    border-radius: 6px;
 
+    color: #FFFFFF;
+    font-size: 27px;
+    font-weight: 700;
+    background-color: #1877F2;
+`
+
+const Form = styled.form`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 13px;
+    input {
+        width: 80%;
+        height: 65px;  
+        border-radius: 6px;
+        box-sizing: border-box;
+        padding: 10px;
+        font-size: 27px;
+    }
+    input::placeholder{
+        color: #9F9F9F;
+        font-size: 27px;
+        font-weight: 700;
+    }
 `
