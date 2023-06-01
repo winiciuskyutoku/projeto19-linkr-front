@@ -1,6 +1,4 @@
-import styled from "styled-components";
-import { AiOutlineHeart } from "react-icons/ai";
-
+import { FramePost, NotLikedIcon, LikedIcon } from "./FramePostsStyle";
 export default function FramePosts({ p }) {
     return (
         <FramePost>
@@ -16,59 +14,3 @@ export default function FramePosts({ p }) {
         </FramePost>
     );
 }
-const FramePost = styled.div`
-    width: 100%;
-    height: 300px;
-    padding: 2%;
-    border-radius: 10px;
-    margin-bottom: 5%;
-    background: #171717;
-    div{
-        width: 10%;
-        height: 35%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-        align-items: center;
-    
-        img{
-            width: 90%;
-            height: 60%;
-            object-fit: cover;
-            border: solid 1px rgba(255, 255, 255, 0.5);
-            border-radius: 60px;
-            cursor: pointer;
-            overflow: auto;
-            
-        }
-    }
-    span{
-        width: 90%;
-        padding: 2%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-
-        h1{
-            color: #fff;
-            font-weight: 500;
-            font-size: 18px;
-        }
-        h2{
-            color: #fff;
-            font-weight: 200;
-            font-size: 14px;
-        }
-
-    }
-`;
-
-const NotLikedIcon = styled(AiOutlineHeart)`
-    width: 60%;
-    height: 25%;
-    color: #fff;
-    cursor: pointer;
-    :hover{
-        color: red;
-    }
-`;
