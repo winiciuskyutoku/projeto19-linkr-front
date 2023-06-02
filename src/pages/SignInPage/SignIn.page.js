@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { Link } from "react-router-dom"
+
 import LoginPage from '../../components/Login/Login.component.jsx'
 
 export default function SignInPage() {
@@ -8,9 +8,7 @@ export default function SignInPage() {
     
     <SingInContainer>
      <LoginPage/>
-      <Link to="/singup">
-        <StyledH2>Primeira vez? Cadastre-se!</StyledH2>
-      </Link>
+     
     </SingInContainer>
 
     </>
