@@ -2,13 +2,17 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom"
 import { TailSpin } from 'react-loader-spinner'
 import styled from "styled-components";
-import UserContextHook from "../../hooks/CitiesContext.Hook";
+import UserContextHook from "../../hooks/UserContext.Hook.jsx";
+import GuestContextHook from "../../hooks/GuestContext.Hook.jsx";
 import axios  from 'axios'
+
+import { Link } from "react-router-dom"
 
 
 export default function LoginPage(){
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const {setUser} = UserContextHook()
+    const {setUser} =UserContextHook()
+    const {setGuest} = GuestContextHook()
     const [email , setEmail] = useState("")
     const [password, setPassword] = useState("")
     const navigate = useNavigate();
@@ -29,10 +33,10 @@ export default function LoginPage(){
         const promise= axios.post(URL , body)
         promise.then(res=>{
             console.log(res.data)
-           // setUser([...res.data])
-            //const {user_id , username, user_photo} = res.data
-           // localStorage.setItem("user" , JSON.stringify({user_id , username, user_photo}))
-            ///const lsUser = JSON.parse(localStorage.getItem("user"))
+           
+            const {user_id , username, user_photo, user_token} = res.data
+            localStorage.setItem("user" , JSON.stringify({user_id:user_id , username:username, user_photo:user_photo, user_token:user_token}))
+            setUser({user_id:user_id , username:username, user_photo:user_photo, user_token:user_token}) 
             navigate("/timeline")
         })
 
@@ -50,6 +54,25 @@ export default function LoginPage(){
 
     }
 
+
+const generateGuestAccess = ()=>{
+    localStorage.setItem("user" , 
+    JSON.stringify({
+        user_id:999, 
+        username:"guest", 
+        user_photo:"https://cdn.onlinewebfonts.com/svg/img_83486.png", 
+        user_token:"guest_token"}))
+
+    setGuest({
+        user_id:999, 
+        username:"guest", 
+        user_photo:"https://cdn.onlinewebfonts.com/svg/img_83486.png", 
+        user_token:"guest_token"})
+    
+
+
+    navigate('/timeline')
+}
    return (
 
 
@@ -87,6 +110,16 @@ export default function LoginPage(){
                                 />):('Entrar')
                          }</StyledButton>
       </Form>
+
+      
+      <StyledButton2 to="/timeline" onClick={() => {  generateGuestAccess() }}>
+                    Entrar como visitante
+        </StyledButton2>
+     
+     <Link to="/singup">
+        <StyledH2>Gostaria de criar uma conta? Cadastre-se!</StyledH2>
+      </Link>
+
     </LoginContainer>
    )
 
@@ -99,6 +132,7 @@ const LoginContainer = styled.div `
     display:flex;
     flex-direction: column;
     background-color: #333333;
+    align-items:center;
 
 `
 const StyledButton = styled.button`
@@ -106,6 +140,42 @@ const StyledButton = styled.button`
     flex-direction: column;
     align-items:center;
     position:relative;
+    width: 80%;
+    height: 65px;
+    font-size:42px;
+    font-weight:bold;
+    color:white;
+    background: #1877F2;
+    border-radius:5px;
+
+
+`
+
+const StyledButton2 = styled.button`
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+    position:relative;
+    width: 80%;
+    height: 65px;
+    align-items: center;
+    justify-content:center;
+    margin-top:20px;
+    margin-bottom: 20px;
+    font-size:21px;
+    font-weight:bold;
+    color:white;
+    background: #1877F2;
+    border-radius:5px;
+
+
+`
+const GuestButton = styled.button`
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+    position:relative;
+    margin-top:15px;
     width: 80%;
     height: 65px;
     font-size:42px;
@@ -136,4 +206,9 @@ const Form = styled.form`
         font-size: 27px;
         font-weight: 700;
     }
+`
+
+const StyledH2 = styled.h2`
+color:white;
+margin-top:15px;
 `

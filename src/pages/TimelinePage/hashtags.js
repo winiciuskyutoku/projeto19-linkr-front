@@ -5,7 +5,7 @@ import axios from "axios";
 export default function Hashtags(){
     const [hashtags, setHashtags] = useState([])
     useEffect(()=>{
-        axios.get("/hashtags")
+        axios.get(`${process.env.REACT_APP_RENDER_URL}/hashtags`)
         .then((res)=>{
             console.log(res.data)
             setHashtags(res.data)
