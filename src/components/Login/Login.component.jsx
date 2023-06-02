@@ -116,7 +116,7 @@ const generateGuestAccess = ()=>{
                     Entrar como visitante
         </StyledButton2>
      
-     <Link to="/singup">
+     <Link to="/sign-up">
         <StyledH2>Gostaria de criar uma conta? Cadastre-se!</StyledH2>
       </Link>
 
