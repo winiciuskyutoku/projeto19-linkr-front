@@ -2,7 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom"
 import { TailSpin } from 'react-loader-spinner'
 import styled from "styled-components";
-import UserContextHook from "../../hooks/CitiesContext.Hook";
+import UserContextHook from "../../hooks/UserContext.Hook.jsx";
+import GuestContextHook from "../../hooks/GuestContext.Hook.jsx";
 import axios  from 'axios'
 
 import { Link } from "react-router-dom"
@@ -11,6 +12,7 @@ import { Link } from "react-router-dom"
 export default function LoginPage(){
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const {setUser} = UserContextHook()
+    const {guest , setGuest} = GuestContextHook()
     const [email , setEmail] = useState("")
     const [password, setPassword] = useState("")
     const navigate = useNavigate();
@@ -35,7 +37,7 @@ export default function LoginPage(){
             const {user_id , username, user_photo, user_token} = res.data
             localStorage.setItem("user" , JSON.stringify({user_id:user_id , username:username, user_photo:user_photo, user_token:user_token}))
             const lsUser = JSON.parse(localStorage.getItem("user"))
-            console.log("userInLocal", lsUser)
+            setUser([lsUser])
             navigate("/timeline")
         })
 
@@ -53,6 +55,19 @@ export default function LoginPage(){
 
     }
 
+
+const generateGuestAccess = ()=>{
+    localStorage.setItem("user" , 
+    JSON.stringify({
+        user_id:999, 
+        username:"guest", 
+        user_photo:"https://cdn.onlinewebfonts.com/svg/img_83486.png", 
+        user_token:"guest_token"}))
+    const lsUser = JSON.parse(localStorage.getItem("user"))
+    setGuest([lsUser])
+    console.log("GUEST",guest)
+    navigate('/timeline')
+}
    return (
 
 
@@ -94,9 +109,10 @@ export default function LoginPage(){
       <Link to="/singup">
         <StyledH2>Gostaria de criar uma conta? Cadastre-se!</StyledH2>
       </Link>
-      <Link to="/timeline">
-        <StyledH2>Entrar como visitante</StyledH2>
-      </Link>
+      <button to="/timeline" onClick={() => {  generateGuestAccess() }}>
+  <StyledH2>Entrar como visitante</StyledH2>
+</button>
+
     </LoginContainer>
    )
 
