@@ -129,6 +129,7 @@ const generateGuestAccess = ()=>{
 }
 
 const LoginContainer = styled.div `
+    margin-top:5px;
     display:flex;
     flex-direction: column;
     background-color: #333333;
@@ -189,6 +190,7 @@ const GuestButton = styled.button`
 
 const Form = styled.form`
     display: flex;
+    margin-top:35px;
     flex-direction: column;
     align-items: center;
     width: 100%;
