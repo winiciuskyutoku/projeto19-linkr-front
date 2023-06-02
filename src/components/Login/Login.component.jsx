@@ -36,7 +36,6 @@ export default function LoginPage(){
            
             const {user_id , username, user_photo, user_token} = res.data
             localStorage.setItem("user" , JSON.stringify({user_id:user_id , username:username, user_photo:user_photo, user_token:user_token}))
-            const lsUser = JSON.parse(localStorage.getItem("user"))
             setUser({user_id:user_id , username:username, user_photo:user_photo, user_token:user_token}) 
             navigate("/timeline")
         })
@@ -63,7 +62,6 @@ const generateGuestAccess = ()=>{
         username:"guest", 
         user_photo:"https://cdn.onlinewebfonts.com/svg/img_83486.png", 
         user_token:"guest_token"}))
-    const lsUser = JSON.parse(localStorage.getItem("user"))
 
     setGuest({
         user_id:999, 

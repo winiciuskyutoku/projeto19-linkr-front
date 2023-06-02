@@ -11,7 +11,7 @@ import UserPage from "./pages/UserPage/UserPage.js";
 
 function App() {
   const [user , setUser] = useState([])
-  const [guest, setGuest] =useState([])
+  const [guest, setGuest] = useState([])
   return (
 
       <GuestContext.Provider value={{guest, setGuest}}>
