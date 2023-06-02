@@ -156,7 +156,7 @@ const StyledButton2 = styled.button`
     justify-content:center;
     margin-top:20px;
     margin-bottom: 20px;
-    font-size:22px;
+    font-size:21px;
     font-weight:bold;
     color:white;
     background: #1877F2;
