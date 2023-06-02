@@ -6,7 +6,9 @@ export default function Publish({ setAtt, att }) {
     const [post_link, setPost_link] = useState()
     const [post_comment, setPost_comment] = useState()
     const [disable, setDisable] = useState(false)
-    const config = { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } }
+    const config = { headers: { Authorization: `Bearer ${localStorage.getItem('user_token')}` } }
+    
+    console.log('CONFIG',config)
     function handleForm(e) {
         e.preventDefault()
         setDisable(true)
