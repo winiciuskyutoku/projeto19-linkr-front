@@ -61,7 +61,7 @@ export default function Header() {
         const zIndex = "1";
         return { top, left, width, position, backgroundColor, borderRadius, border };
     };
-    console.log(JSON.parse(localStorage.getItem("user")).user_photo);
+
     return (
         <ContainerHeader onClick={() => setArrowActive(false)}>
             <h1>linkr</h1>

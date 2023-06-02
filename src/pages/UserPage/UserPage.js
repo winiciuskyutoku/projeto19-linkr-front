@@ -17,7 +17,6 @@ export default function UserPage() {
         const url = `${process.env.REACT_APP_RENDER_URL}/profile-user/${id}`;
 
         axios.get(url).then((sucess) => {
-            console.log(sucess.data);
             setUserProfile(sucess.data);
         }).catch((error) => {
             console.log(error.response);
