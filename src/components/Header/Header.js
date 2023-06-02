@@ -11,6 +11,7 @@ export default function Header() {
     const [filteredProfiles, setFilteredProfiles] = useState([]);
     const userRef = useRef(null);
     const researchRef = useRef(null);
+    const userImage = JSON.parse(localStorage.getItem("user")).user_photo;
     const navigate = useNavigate();
 
     function research(e) {
@@ -33,7 +34,7 @@ export default function Header() {
         setArrowActive(true);
     }
     function logout() {
-        localStorage.removeItem("user");
+        localStorage.removeItem("auth");
         navigate('/');
     }
     function logoutPosition() {
@@ -60,7 +61,7 @@ export default function Header() {
         const zIndex = "1";
         return { top, left, width, position, backgroundColor, borderRadius, border };
     };
-
+    console.log(JSON.parse(localStorage.getItem("user")).user_photo);
     return (
         <ContainerHeader onClick={() => setArrowActive(false)}>
             <h1>linkr</h1>
@@ -92,18 +93,18 @@ export default function Header() {
                 arrowActive ?
                     <User ref={userRef}>
                         <ArrowUp onClick={() => setArrowActive(false)} />
-                        <div onClick={() => setArrowActive(false)}></div>
+                        <img src={userImage} alt="" onClick={() => setArrowActive(false)}/>
                     </User>
                     :
                     <User ref={userRef}>
                         <ArrowDown onClick={(e) => active(e)} />
-                        <div onClick={(e) => active(e)}></div>
+                        <img src={userImage} alt="" onClick={(e) => active(e)}/>
                     </User>
 
             }
             {arrowActive &&
                 <span style={{ ...logoutPosition() }}>
-                    <p onClick={logout}>Logout</p>
+                    <p onClick={()=>logout()}>Logout</p>
                 </span>
             }
         </ContainerHeader>
