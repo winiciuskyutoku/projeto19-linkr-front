@@ -1,12 +1,14 @@
 import { useState } from "react";
-import { CommentInput, LinkInput, PublishButton, PublishContainer, PublishTitle, StyledH2, TitleContainer } from "./TimelineStyle";
+import { CommentInput, LinkInput, PublishButton, PublishContainer, PublishTitle } from "./TimelineStyle";
 import axios from "axios";
 
-export default function Publish({setAtt, att}) {
+export default function Publish({ setAtt, att }) {
     const [post_link, setPost_link] = useState()
     const [post_comment, setPost_comment] = useState()
     const [disable, setDisable] = useState(false)
-    const config = { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } }
+    const config = { headers: { Authorization: `Bearer ${localStorage.getItem('user_token')}` } }
+    
+    console.log('CONFIG',config)
     function handleForm(e) {
         e.preventDefault()
         setDisable(true)
@@ -26,19 +28,14 @@ export default function Publish({setAtt, att}) {
             })
     }
     return (
-        <>
-            <TitleContainer>
-                <StyledH2>timeline</StyledH2>
-            </TitleContainer>
-            <PublishContainer onSubmit={handleForm}>
-                <img/>
-                <PublishTitle>What are you going to share today?</PublishTitle>
-                <LinkInput placeholder="http://..." type="url" value={post_link}
-                    onChange={(e) => setPost_link(e.target.value)} disabled={disable} required />
-                <CommentInput placeholder="Awesome article about #javascript" type="text"
-                    value={post_comment} onChange={(e) => setPost_comment(e.target.value)} disabled={disable} />
-                <PublishButton type="submit" disabled={disable}>{disable?'Publishing...':'Publish'}</PublishButton>
-            </PublishContainer>
-        </>
+        <PublishContainer onSubmit={handleForm}>
+            <img />
+            <PublishTitle>What are you going to share today?</PublishTitle>
+            <LinkInput placeholder="http://..." type="url" value={post_link}
+                onChange={(e) => setPost_link(e.target.value)} disabled={disable} required />
+            <CommentInput placeholder="Awesome article about #javascript" type="text"
+                value={post_comment} onChange={(e) => setPost_comment(e.target.value)} disabled={disable} />
+            <PublishButton type="submit" disabled={disable}>{disable ? 'Publishing...' : 'Publish'}</PublishButton>
+        </PublishContainer>
     )
 }
