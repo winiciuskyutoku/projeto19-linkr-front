@@ -160,6 +160,10 @@ export const PostContent = styled.div`
     font-size: 19px;
     font-weight: 400;
     color: #FFFFFF;
+    cursor: pointer;
+    :hover{
+      color: #4D4D4D;
+    }
   }
   h2{
     font-size: 17px;
