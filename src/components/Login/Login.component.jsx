@@ -29,10 +29,11 @@ export default function LoginPage(){
         const promise= axios.post(URL , body)
         promise.then(res=>{
             console.log(res.data)
-           // setUser([...res.data])
-            //const {user_id , username, user_photo} = res.data
-           // localStorage.setItem("user" , JSON.stringify({user_id , username, user_photo}))
-            ///const lsUser = JSON.parse(localStorage.getItem("user"))
+           
+            const {user_id , username, user_photo, user_token} = res.data
+            localStorage.setItem("user" , JSON.stringify({user_id:user_id , username:username, user_photo:user_photo, user_token:user_token}))
+            const lsUser = JSON.parse(localStorage.getItem("user"))
+            console.log("userInLocal", lsUser)
             navigate("/timeline")
         })
 
