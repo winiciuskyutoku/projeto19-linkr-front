@@ -5,6 +5,8 @@ import styled from "styled-components";
 import UserContextHook from "../../hooks/CitiesContext.Hook";
 import axios  from 'axios'
 
+import { Link } from "react-router-dom"
+
 
 export default function LoginPage(){
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -88,6 +90,13 @@ export default function LoginPage(){
                                 />):('Entrar')
                          }</StyledButton>
       </Form>
+
+      <Link to="/singup">
+        <StyledH2>Gostaria de criar uma conta? Cadastre-se!</StyledH2>
+      </Link>
+      <Link to="/timeline">
+        <StyledH2>Entrar como visitante</StyledH2>
+      </Link>
     </LoginContainer>
    )
 
@@ -100,6 +109,7 @@ const LoginContainer = styled.div `
     display:flex;
     flex-direction: column;
     background-color: #333333;
+    align-items:center;
 
 `
 const StyledButton = styled.button`
@@ -107,6 +117,22 @@ const StyledButton = styled.button`
     flex-direction: column;
     align-items:center;
     position:relative;
+    width: 80%;
+    height: 65px;
+    font-size:42px;
+    font-weight:bold;
+    color:white;
+    background: #1877F2;
+    border-radius:5px;
+
+
+`
+const GuestButton = styled.button`
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+    position:relative;
+    margin-top:15px;
     width: 80%;
     height: 65px;
     font-size:42px;
@@ -137,4 +163,9 @@ const Form = styled.form`
         font-size: 27px;
         font-weight: 700;
     }
+`
+
+const StyledH2 = styled.h2`
+color:white;
+margin-top:15px;
 `
