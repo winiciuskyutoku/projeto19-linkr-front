@@ -14,8 +14,8 @@ function App() {
   const [guest, setGuest] =useState([])
   return (
 
-      <GuestContext.Provider value={{guest:guest, setGuest:setGuest}}>
-      <UserContext.Provider value={{user:user, setGuest:setUser}}>
+      <GuestContext.Provider value={{guest, setGuest}}>
+      <UserContext.Provider value={{user, setUser}}>
         <BrowserRouter>
           <Routes>
                   <Route path="/" element={<SignInPage />} exact/>
