@@ -33,7 +33,7 @@ export default function Header() {
         setArrowActive(true);
     }
     function logout() {
-        localStorage.removeItem("auth");
+        localStorage.removeItem("user");
         navigate('/');
     }
     function logoutPosition() {
