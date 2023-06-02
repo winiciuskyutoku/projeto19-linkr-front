@@ -28,7 +28,3 @@ const SingInContainer = styled.section`
 
 `
 
-const StyledH2 = styled.h2`
-
-margin-top:15px;
-`
