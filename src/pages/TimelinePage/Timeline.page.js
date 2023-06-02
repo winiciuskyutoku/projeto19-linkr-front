@@ -3,8 +3,11 @@ import Header from "../../components/Header/Header"
 import Publish from "./Publish"
 import { ContainerContent, StyledH2, TimelineContainer, TitleContainer } from "./TimelineStyle"
 import Hashtags from "./hashtags"
+import GuestContextHook from "../../hooks/GuestContext.Hook.jsx"
 
 export default function TimelinePage() {
+  const {guest} = GuestContextHook();
+  console.log('GUEST', guest)
   //att será usado para atualizar a timeline
   const [att, setAtt] = useState(true)
   const [displayDiv, setDisplayDiv] = useState(false);

@@ -33,7 +33,7 @@ export default function Header() {
         setArrowActive(true);
     }
     function logout() {
-        localStorage.removeItem("auth");
+        localStorage.removeItem("user");
         navigate('/');
     }
     function logoutPosition() {
@@ -79,7 +79,7 @@ export default function Header() {
                         {filteredProfiles.map((profile, index) => (
                             <Item key={index} onClick={() => {
                                 setSearchValue('');
-                                // navigate(`/home-user/${profile.userId}`);
+                                navigate(`/user-page/${profile.user_id}`);
                             }}>
                                 <img src={profile.user_photo} alt="" />
                                 <p>{profile.username}</p>
