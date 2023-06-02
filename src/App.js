@@ -6,6 +6,7 @@ import { UserContext } from "./context/UserContext.jsx";
 import { GuestContext } from "./context/GuestContext.jsx";
 import { useState } from "react";
 import UserPage from "./pages/UserPage/UserPage.js";
+import HashtagPage from "./pages/TimelinePage/HashtagPage.js";
 
 
 
@@ -22,6 +23,7 @@ function App() {
                   <Route path="/singup" element={<SignUpPage />} />
                   <Route path="/timeline" element={<TimelinePage />} />
                   <Route path="/user-page/:id" element={<UserPage />} />
+                  <Route path="/hashtag/:hashtag" element={<HashtagPage/>}/>
           </Routes>
         </BrowserRouter>
     </UserContext.Provider>

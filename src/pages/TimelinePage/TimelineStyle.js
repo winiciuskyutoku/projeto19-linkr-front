@@ -10,7 +10,7 @@ export const TimelineContainer = styled.section`
   align-items: center;
 @media (max-width: 611px) {
   width:100%;
-  height:100%;
+  height:100vh;
 }
 `
 
@@ -147,7 +147,7 @@ box-sizing:border-box;
 padding-bottom: 30px;
 display:flex;
 flex-direction:column;
-p{
+a{
   font-family: 'Lato';
   font-style: normal;
   font-weight: 700;
@@ -156,15 +156,32 @@ p{
   letter-spacing: 0.05em;
   color: #FFFFFF;
   margin-left:16px;
+  text-decoration:none;
 }
 @media (max-width: 1000px) {
+  display:flex;
   right:5px;
-  @media (max-width: 937px) {
-  display:none;
 }
+@media (max-width: 937px) {
+  display:${props=>props.displayDiv?'flex':'none'};
+  z-index:100;
+  top:100px;
 }
-
 `
+export const BackHashtag = styled.div`
+position:fixed;
+top:72px;
+right:0;
+width:320px;
+height:100%;
+z-index:90;
+@media (max-width: 937px) {
+  background-color:black;
+  opacity:0.95;
+  display:${props=>props.displayDiv?'flex':'none'};
+}
+`
+
 export const HashtagTitle = styled.div`
 width:100%;
 height:60px;

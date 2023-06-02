@@ -1,35 +1,41 @@
 import { useEffect, useState } from "react";
-import { ContainerHashtags, HashtagTitle } from "./TimelineStyle";
+import { BackHashtag, ContainerHashtags, HashtagTitle } from "./TimelineStyle";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
-export default function Hashtags(){
+export default function Hashtags({ displayDiv }) {
     const [hashtags, setHashtags] = useState([])
-    useEffect(()=>{
+    useEffect(() => {
         axios.get(`${process.env.REACT_APP_RENDER_URL}/hashtags`)
-        .then((res)=>{
-            console.log(res.data)
-            setHashtags(res.data)
-        })
-        .catch((err)=>{
-            console.log(err.response.data)
-        })
+            .then((res) => {
+                console.log(res.data)
+                setHashtags(res.data)
+            })
+            .catch((err) => {
+                console.log(err.response.data)
+            })
     }, [])
-    if(!hashtags||hashtags.length===0){
-        return(
-            <ContainerHashtags>
-            <HashtagTitle>
-                <h2>trending</h2>
-            </HashtagTitle>
-        </ContainerHashtags>
+
+    if (!hashtags || hashtags.length === 0) {
+        return (
+            <BackHashtag displayDiv={displayDiv}>
+                <ContainerHashtags displayDiv={displayDiv} >
+                    <HashtagTitle>
+                        <h2>trending</h2>
+                    </HashtagTitle>
+                </ContainerHashtags>
+            </BackHashtag >
         )
     }
-    return(
-        <ContainerHashtags>
-            <HashtagTitle>
-                <h2>trending</h2>
-            </HashtagTitle>
-            {hashtags.map((h)=>
-            <p key={h.hashtag_id}>{h.hashtag_tag}</p>)}
-        </ContainerHashtags>
+    return (
+        <BackHashtag displayDiv={displayDiv}>
+            <ContainerHashtags displayDiv={displayDiv}>
+                <HashtagTitle>
+                    <h2>trending</h2>
+                </HashtagTitle>
+                {hashtags.map((h) =>
+                    <Link to={`/hashtag/${h.hashtag_tag.replace('#', '')}`} key={h.hashtag_id}>{h.hashtag_tag}</Link>)}
+            </ContainerHashtags>
+        </BackHashtag>
     )
 }
