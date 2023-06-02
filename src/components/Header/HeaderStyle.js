@@ -8,6 +8,7 @@ export const ContainerHeader = styled.div`
 
     position: fixed;
     top: 0;
+    z-index: 2;
 
     display: flex;
     justify-content: space-between;
@@ -46,12 +47,14 @@ export const User = styled.div`
     justify-content: space-between;
     z-index: 1;
 
-    div{
+    img{
         width: 50px;
         height: 50px;
+        background-color: #fff;
         margin-left: 10px;
         border: solid 1px rgba(255, 255, 255, 0.5);
         border-radius: 60px;
+        object-fit: cover;
         cursor: pointer;
     }
 `;

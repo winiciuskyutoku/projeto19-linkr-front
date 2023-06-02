@@ -174,7 +174,7 @@ top:72px;
 right:0;
 width:320px;
 height:100%;
-z-index:90;
+z-index:1;
 @media (max-width: 937px) {
   background-color:black;
   opacity:0.95;
