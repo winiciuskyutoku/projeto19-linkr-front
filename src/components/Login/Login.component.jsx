@@ -65,7 +65,6 @@ const generateGuestAccess = ()=>{
         user_token:"guest_token"}))
     const lsUser = JSON.parse(localStorage.getItem("user"))
     setGuest([lsUser])
-    console.log("GUEST",guest)
     navigate('/timeline')
 }
    return (
@@ -106,12 +105,14 @@ const generateGuestAccess = ()=>{
                          }</StyledButton>
       </Form>
 
-      <Link to="/singup">
+      
+      <StyledButton2 to="/timeline" onClick={() => {  generateGuestAccess() }}>
+                    Entrar como visitante
+        </StyledButton2>
+     
+     <Link to="/singup">
         <StyledH2>Gostaria de criar uma conta? Cadastre-se!</StyledH2>
       </Link>
-      <button to="/timeline" onClick={() => {  generateGuestAccess() }}>
-  <StyledH2>Entrar como visitante</StyledH2>
-</button>
 
     </LoginContainer>
    )
@@ -136,6 +137,26 @@ const StyledButton = styled.button`
     width: 80%;
     height: 65px;
     font-size:42px;
+    font-weight:bold;
+    color:white;
+    background: #1877F2;
+    border-radius:5px;
+
+
+`
+
+const StyledButton2 = styled.button`
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+    position:relative;
+    width: 80%;
+    height: 65px;
+    align-items: center;
+    justify-content:center;
+    margin-top:20px;
+    margin-bottom: 20px;
+    font-size:21px;
     font-weight:bold;
     color:white;
     background: #1877F2;
