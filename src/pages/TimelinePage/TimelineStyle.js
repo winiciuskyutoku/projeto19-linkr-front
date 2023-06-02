@@ -211,10 +211,10 @@ export const Loading = styled.div`
     justify-content: center;
 `
 
-@media (max-width: 611px) {
+/* @media (max-width: 611px) {
   bottom:12px;
   right:15px;
-}
+} */
 
 export const ContainerHashtags = styled.div`
 background: #171717;

@@ -1,13 +1,9 @@
 import { useState } from "react"
 import Header from "../../components/Header/Header"
 import Publish from "./Publish"
-import { TimelineContainer } from "./TimelineStyle"
 import TimeLinePost from "./Post"
 import { useEffect } from "react"
 import axios from "axios"
-
-export default function TimelinePage() {
-
 import { ContainerContent, StyledH2, TimelineContainer, TitleContainer } from "./TimelineStyle"
 import Hashtags from "./hashtags"
 import GuestContextHook from "../../hooks/GuestContext.Hook.jsx"
