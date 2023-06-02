@@ -11,8 +11,8 @@ import { Link } from "react-router-dom"
 
 export default function LoginPage(){
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const {setUser} = UserContextHook()
-    const {guest , setGuest} = GuestContextHook()
+    const {setUser} =UserContextHook()
+    const {setGuest} = GuestContextHook()
     const [email , setEmail] = useState("")
     const [password, setPassword] = useState("")
     const navigate = useNavigate();
@@ -37,7 +37,7 @@ export default function LoginPage(){
             const {user_id , username, user_photo, user_token} = res.data
             localStorage.setItem("user" , JSON.stringify({user_id:user_id , username:username, user_photo:user_photo, user_token:user_token}))
             const lsUser = JSON.parse(localStorage.getItem("user"))
-            setUser([lsUser])
+            setUser({user_id:user_id , username:username, user_photo:user_photo, user_token:user_token}) 
             navigate("/timeline")
         })
 
@@ -64,8 +64,12 @@ const generateGuestAccess = ()=>{
         user_photo:"https://cdn.onlinewebfonts.com/svg/img_83486.png", 
         user_token:"guest_token"}))
     const lsUser = JSON.parse(localStorage.getItem("user"))
-    setGuest([lsUser])
-    console.log("GUEST",guest)
+    setGuest({
+        user_id:999, 
+        username:"guest", 
+        user_photo:"https://cdn.onlinewebfonts.com/svg/img_83486.png", 
+        user_token:"guest_token"})
+    
     navigate('/timeline')
 }
    return (
