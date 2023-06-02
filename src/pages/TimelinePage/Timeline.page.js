@@ -1,6 +1,13 @@
 import { useState } from "react"
 import Header from "../../components/Header/Header"
 import Publish from "./Publish"
+import { TimelineContainer } from "./TimelineStyle"
+import TimeLinePost from "./Post"
+import { useEffect } from "react"
+import axios from "axios"
+
+export default function TimelinePage() {
+
 import { ContainerContent, StyledH2, TimelineContainer, TitleContainer } from "./TimelineStyle"
 import Hashtags from "./hashtags"
 import GuestContextHook from "../../hooks/GuestContext.Hook.jsx"
@@ -11,6 +18,11 @@ export default function TimelinePage() {
   //att será usado para atualizar a timeline
   const [att, setAtt] = useState(true)
   const [displayDiv, setDisplayDiv] = useState(false);
+  const [postData, setPostData] = useState(null)
+  useEffect(() => {
+    axios.get(`http://localhost:4000/get-posts`).then(sucess => setPostData(sucess.data)).catch(fail => setPostData(fail.code))
+  }, [])
+
   let initialX = null;
 
   function handleTouchStart(event) {
@@ -43,6 +55,7 @@ export default function TimelinePage() {
       <ContainerContent>
         <Publish att={att} setAtt={setAtt} />
       </ContainerContent>
+      <TimeLinePost postData={postData}></TimeLinePost>
     </TimelineContainer>
   )
 }

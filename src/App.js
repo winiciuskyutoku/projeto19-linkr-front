@@ -20,7 +20,7 @@ function App() {
         <BrowserRouter>
           <Routes>
                   <Route path="/" element={<SignInPage />} exact/>
-                  <Route path="/singup" element={<SignUpPage />} />
+                  <Route path="/sign-up" element={<SignUpPage />} />
                   <Route path="/timeline" element={<TimelinePage />} />
                   <Route path="/user-page/:id" element={<UserPage />} />
                   <Route path="/hashtag/:hashtag" element={<HashtagPage/>}/>

@@ -8,7 +8,7 @@ export const SignUpContainer = styled.section`
   align-items: center;
   width: 35%;
 
-  background-color: #E5E5E5;
+  background-color: #333333;
 `
 export const MainContainer = styled.div`
     display: flex;
