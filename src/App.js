@@ -16,7 +16,7 @@ function App() {
         <BrowserRouter>
           <Routes>
                   <Route path="/" element={<SignInPage />} exact/>
-                  <Route path="/singup" element={<SignUpPage />} />
+                  <Route path="/sign-up" element={<SignUpPage />} />
                   <Route path="/timeline" element={<TimelinePage />} />
           </Routes>
         </BrowserRouter>

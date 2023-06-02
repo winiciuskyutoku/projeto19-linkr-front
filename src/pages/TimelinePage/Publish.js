@@ -31,7 +31,7 @@ export default function Publish({setAtt, att}) {
                 <StyledH2>timeline</StyledH2>
             </TitleContainer>
             <PublishContainer onSubmit={handleForm}>
-                <img />
+                <img/>
                 <PublishTitle>What are you going to share today?</PublishTitle>
                 <LinkInput placeholder="http://..." type="url" value={post_link}
                     onChange={(e) => setPost_link(e.target.value)} disabled={disable} required />

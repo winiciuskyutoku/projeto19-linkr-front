@@ -18,6 +18,10 @@ export default function SingUpPage() {
     function registerUser(e) {
 
         if (emailRegex.test(userEmail)) {
+            if(userPassword.length < 6){
+                return alert("Senha que ter no minimo 6 caracteres!")
+            }
+
             if (userPassword === confirmPwd) {
                 e.preventDefault()
                 setBtnClicked(true);
