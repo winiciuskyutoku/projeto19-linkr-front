@@ -12,15 +12,15 @@ export const FramePost = styled.div`
 
     div{
         width: 10%;
-        height: 35%;
+        height: 100%;
         display: flex;
         flex-direction: column;
-        justify-content: space-around;
+        justify-content: flex-start;
         align-items: center;
     
         img{
-            width: 90%;
-            height: 60%;
+            width: 75%;
+            height: 20%;
             object-fit: cover;
             border: solid 1px rgba(255, 255, 255, 0.5);
             border-radius: 60px;
@@ -49,7 +49,7 @@ export const FramePost = styled.div`
 `;
 
 export const NotLikedIcon = styled(AiOutlineHeart)`
-    width: 60%;
+    width: 40%;
     height: 25%;
     color: #fff;
     cursor: pointer;
@@ -59,11 +59,11 @@ export const NotLikedIcon = styled(AiOutlineHeart)`
 `;
 
 export const LikedIcon = styled(AiFillHeart)`
-    width: 60%;
+    width: 40%;
     height: 25%;
-    color: #fff;
+    color: red;
     cursor: pointer;
     :hover{
-        color: red;
+        color: white;
     }
 `;

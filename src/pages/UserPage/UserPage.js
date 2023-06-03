@@ -11,16 +11,29 @@ import { ContainerProfile, UserName, UserPicture, ContainerMain, ContainerPost, 
 
 export default function UserPage() {
     const [userProfile, setUserProfile] = useState(null);
+    const [likesPosts, setLikesPosts] = useState(null);
+
     const { id } = useParams();
+    const user = JSON.parse(localStorage.getItem("user"));
 
     useEffect(() => {
         const url = `${process.env.REACT_APP_RENDER_URL}/profile-user/${id}`;
 
         axios.get(url).then((sucess) => {
-            setUserProfile(sucess.data);
+            console.log(sucess.data)
+            setUserProfile(sucess.data.profile);
+            setLikesPosts(sucess.data.likes);
         }).catch((error) => {
             console.log(error.response);
         });
+
+        // const urlLikes = `${process.env.REACT_APP_RENDER_URL}/all-likes/${id}`;
+
+        // axios.get(url).then((sucess) => {
+        //     setUserProfile(sucess.data);
+        // }).catch((error) => {
+        //     console.log(error.response);
+        // });
     }, [id]);
 
     return (
@@ -36,8 +49,8 @@ export default function UserPage() {
                 <ContainerMain>
                     <ContainerPost>
                         {userProfile &&
-                            userProfile.length > 1 ?
-                            userProfile.map((p) => <FramePosts key={p.post_id} p={p} />)
+                            userProfile[0].post_id !== null ?
+                            userProfile.map((p) => <FramePosts key={p.post_id} p={p} likes={likesPosts} user={user}/>)
                             :
                             <FrameNoPost>
                                 <h1>Ainda não há postagens</h1>

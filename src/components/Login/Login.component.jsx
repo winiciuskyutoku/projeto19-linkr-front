@@ -30,6 +30,7 @@ export default function LoginPage(){
         
         const URL = `${process.env.REACT_APP_RENDER_URL}/sign-in`
         const body ={email,password}
+        console.log(body);
         const promise= axios.post(URL , body)
         promise.then(res=>{
             console.log(res.data)
@@ -42,7 +43,7 @@ export default function LoginPage(){
 
         promise.catch(err=>{
             alert(err.response.data.message)
-            window.location.reload(true)
+            // window.location.reload(true)
         })
         
         }else{
