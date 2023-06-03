@@ -80,7 +80,8 @@ const generateGuestAccess = ()=>{
     <LoginContainer>
     
          <Form>
-         <input 
+        <input            
+                        data-test="email" 
                         type="email" 
                         value={email}
                         placeholder="Email"
@@ -89,7 +90,7 @@ const generateGuestAccess = ()=>{
                         onChange={e=>setEmail(e.target.value)}
          ></input>
          <input 
-                       
+                        data-test="password"
                         type="password"
                         value={password}
                         placeholder="Senha"
@@ -97,7 +98,7 @@ const generateGuestAccess = ()=>{
                         required
                         onChange={e=>setPassword(e.target.value)}
          ></input>
-        <StyledButton onClick= {(e)=>login(e)} type="submit">{
+        <StyledButton data-test="login-btn" onClick= {(e)=>login(e)} type="submit">{
                                     btnClicked ? 
                                     (<TailSpin
                                         height="50"
@@ -117,7 +118,7 @@ const generateGuestAccess = ()=>{
                     Guest
         </StyledButton2>
      
-     <Link to="/sign-up">
+     <Link to="/sign-up" data-test="sign-up-link">
         <StyledH2>Gostaria de criar uma conta? Cadastre-se!</StyledH2>
       </Link>
 

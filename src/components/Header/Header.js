@@ -82,7 +82,7 @@ export default function Header() {
                                 setSearchValue('');
                                 navigate(`/user-page/${profile.user_id}`);
                             }}>
-                                <img src={profile.user_photo} alt="" />
+                                <img data-test="avatar" src={profile.user_photo} alt="" />
                                 <p>{profile.username}</p>
                             </Item>
                         ))}
