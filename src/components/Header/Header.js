@@ -64,7 +64,7 @@ export default function Header() {
 
     return (
         <ContainerHeader onClick={() => setArrowActive(false)}>
-            <h1>linkr</h1>
+            <h1 onClick={()=>navigate("/timeline")}>linkr</h1>
             <DebounceInput element={InputStyled}
                 type="text"
                 placeholder="Pesquisar usuários"

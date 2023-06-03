@@ -18,6 +18,7 @@ export const ContainerHeader = styled.div`
         font-family: 'Poppins';
         color: #fff;
         font-size: 36px;
+        cursor: pointer;
     }
 
     span{

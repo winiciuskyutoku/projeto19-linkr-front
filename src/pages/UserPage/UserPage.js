@@ -8,6 +8,7 @@ import FramePosts from "../../components/FramePost/FramePosts";
 import Hashtags from "../TimelinePage/hashtags";
 
 import { ContainerProfile, UserName, UserPicture, ContainerMain, ContainerPost, FrameNoPost } from "./UserPageStyle";
+import { LoadingCircle, LoadingThreeDots } from "../../components/Loading/Loading";
 
 export default function UserPage() {
     const [userProfile, setUserProfile] = useState(null);
@@ -48,13 +49,15 @@ export default function UserPage() {
                 </UserName>
                 <ContainerMain>
                     <ContainerPost>
-                        {userProfile &&
+                        {userProfile ?
                             userProfile[0].post_id !== null ?
                             userProfile.map((p) => <FramePosts key={p.post_id} p={p} likes={likesPosts} user={user}/>)
                             :
                             <FrameNoPost>
                                 <h1>Ainda não há postagens</h1>
                             </FrameNoPost>
+                            :
+                            <LoadingThreeDots/>
                         }
                     </ContainerPost>
                     <Hashtags />
