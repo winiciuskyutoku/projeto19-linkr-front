@@ -108,13 +108,13 @@ const generateGuestAccess = ()=>{
                                         wrapperStyle={{}}
                                         wrapperClass=""
                                         visible={btnClicked}
-                                />):('Entrar')
+                                />):('Log In')
                          }</StyledButton>
       </Form>
 
       
       <StyledButton2 to="/timeline" onClick={() => {  generateGuestAccess() }}>
-                    Entrar como visitante
+                    Guest
         </StyledButton2>
      
      <Link to="/sign-up">
@@ -142,14 +142,20 @@ const StyledButton = styled.button`
     flex-direction: column;
     align-items:center;
     position:relative;
+    font-family:'Oswald';
     width: 80%;
     height: 65px;
-    font-size:42px;
-    font-weight:bold;
+    font-size:30px;
+    align-items:center;
+    justify-content:center;
+    font-weight:600;
     color:white;
     background: #1877F2;
     border-radius:5px;
-
+    &:hover{
+        cursor:
+        pointer;
+    }
 
 `
 
@@ -164,11 +170,16 @@ const StyledButton2 = styled.button`
     justify-content:center;
     margin-top:20px;
     margin-bottom: 20px;
-    font-size:21px;
-    font-weight:bold;
+    font-size:28px;
+    font-family:'Oswald';
+    font-weight:600;
     color:white;
     background: #1877F2;
     border-radius:5px;
+    &:hover{
+        cursor:
+        pointer;
+    }
 
 
 `
@@ -203,6 +214,7 @@ const Form = styled.form`
         box-sizing: border-box;
         padding: 10px;
         font-size: 27px;
+        font-family:'Oswald'
     }
     input::placeholder{
         color: #ebebeb;
@@ -212,6 +224,8 @@ const Form = styled.form`
 `
 
 const StyledH2 = styled.h2`
+font-family:'Lato';
+text-decoration:none;
 color:white;
 margin-top:15px;
 `
