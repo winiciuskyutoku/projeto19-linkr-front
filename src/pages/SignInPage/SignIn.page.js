@@ -1,6 +1,7 @@
 import styled from "styled-components"
 
 import LoginPage from '../../components/Login/Login.component.jsx'
+import BannerLogin from "../../components/Login/Banner.component.jsx"
 
 export default function SignInPage() {
   return (
@@ -8,6 +9,7 @@ export default function SignInPage() {
     
     <SingInContainer>
      <LoginPage/>
+     <BannerLogin/>
     </SingInContainer>
 
     </>

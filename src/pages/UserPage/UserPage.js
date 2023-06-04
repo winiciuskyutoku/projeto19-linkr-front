@@ -8,21 +8,26 @@ import FramePosts from "../../components/FramePost/FramePosts";
 import Hashtags from "../TimelinePage/hashtags";
 
 import { ContainerProfile, UserName, UserPicture, ContainerMain, ContainerPost, FrameNoPost } from "./UserPageStyle";
+import { LoadingCircle, LoadingThreeDots } from "../../components/Loading/Loading";
 
 export default function UserPage() {
     const [userProfile, setUserProfile] = useState(null);
+    const [likesPosts, setLikesPosts] = useState(null);
+    const [reload, setReload] = useState(false);
+
     const { id } = useParams();
+    const user = JSON.parse(localStorage.getItem("user"));
 
     useEffect(() => {
         const url = `${process.env.REACT_APP_RENDER_URL}/profile-user/${id}`;
 
         axios.get(url).then((sucess) => {
-            console.log(sucess.data);
-            setUserProfile(sucess.data);
+            setUserProfile(sucess.data.profile);
+            setLikesPosts(sucess.data.likes);
         }).catch((error) => {
             console.log(error.response);
         });
-    }, [id]);
+    }, [reload, id]);
 
     return (
         <>
@@ -36,13 +41,15 @@ export default function UserPage() {
                 </UserName>
                 <ContainerMain>
                     <ContainerPost>
-                        {userProfile &&
-                            userProfile.length > 1 ?
-                            userProfile.map((p) => <FramePosts key={p.post_id} p={p} />)
+                        {userProfile ?
+                            userProfile[0].post_id !== null ?
+                            userProfile.map((p) => <FramePosts key={p.post_id} p={p} likes={likesPosts} user={user} setReload={setReload}/>)
                             :
                             <FrameNoPost>
                                 <h1>Ainda não há postagens</h1>
                             </FrameNoPost>
+                            :
+                            <LoadingThreeDots/>
                         }
                     </ContainerPost>
                     <Hashtags />

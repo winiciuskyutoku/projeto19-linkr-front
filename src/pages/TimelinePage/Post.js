@@ -1,8 +1,10 @@
 import urlMetadata from "url-metadata"
 import { Post, PostContent, Loading } from "./TimelineStyle"
 import { PublishContainer } from "./TimelineStyle"
+import { useNavigate } from "react-router-dom"
 
 export default function TimeLinePost({ postData }) {
+    const navigate = useNavigate();
 
     console.log(postData)
 
@@ -52,7 +54,7 @@ export default function TimeLinePost({ postData }) {
                 <Post>
                     <img src={e.user_photo}></img>
                     <PostContent>
-                    <h1>{e.username}</h1>
+                    <h1 onClick={()=>navigate(`/user-page/${e.user_id}`)}>{e.username}</h1>
                     <h2>{e.post_comment}</h2>
                     <div>
                         <div>
