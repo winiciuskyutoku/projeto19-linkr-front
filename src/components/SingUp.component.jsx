@@ -40,7 +40,7 @@ export default function SingUpPage() {
                     require.catch(err => {
                         setBtnClicked(false)
                         console.log(err.message)
-                        {err.response.status.message === 409 && alert("usuario já cadastrado")}
+                        {err.response.status.message === 409 && alert("email or username already registered/")}
 
                     })
 
@@ -64,15 +64,16 @@ export default function SingUpPage() {
 
             <Form>
                 <input
+                     data-test="username" 
                     type="text"
                     value={userName}
-                    placeholder="Nome"
+                    placeholder="username"
                     disabled={btnClicked}
                     required
                     onChange={e => setUserName(e.target.value)}
                 ></input>
                 <input
-
+                     data-test="email" 
                     type="email"
                     value={userEmail}
                     placeholder="Email"
@@ -81,7 +82,7 @@ export default function SingUpPage() {
                     onChange={e => setUserEmail(e.target.value)}
                 ></input>
                 <input
-
+                    data-test="password" 
                     type="password"
                     value={userPassword}
                     placeholder="Senha"
@@ -98,7 +99,8 @@ export default function SingUpPage() {
                     required
                     onChange={e => setConfirmPwd(e.target.value)}
                 />
-                <input
+                <input  
+                    data-test="picture-url" 
                     type="url"
                     value={picture}
                     placeholder="Url da foto"
@@ -107,6 +109,7 @@ export default function SingUpPage() {
                     onChange={e => setPicture(e.target.value)}
                 />
                 <StyledButton
+                     data-test="sign-up-btn" 
                     onClick={(e) => registerUser(e)}
                     type="submit"> {
                         btnClicked ?
