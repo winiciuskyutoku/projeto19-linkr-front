@@ -34,13 +34,13 @@ export default function SingUpPage() {
                     require.then(res => {
                         alert("usuário Cadastrado com sucesso!")
                         setBtnClicked(false)
-                        navigate("/sing-in")
+                        navigate("/")
 
                     })
                     require.catch(err => {
                         setBtnClicked(false)
                         console.log(err.message)
-                        {err.response.status.message === 409 && alert("usuario já cadastrado")}
+                        {err.response.status.message === 409 && alert("email or username already registered/")}
 
                     })
 

@@ -13,7 +13,7 @@ export default function SignUp() {
       </BannerContainer>
       <SignUpContainer>
         <SingUpPage />
-        <Link to="/sign-in"  data-test="login-link" >
+        <Link to="/"  data-test="login-link" >
           Já tem uma conta? Entre agora!
         </Link>
       </SignUpContainer>
