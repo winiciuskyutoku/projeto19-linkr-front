@@ -34,7 +34,7 @@ export default function SingUpPage() {
                     require.then(res => {
                         alert("usuário Cadastrado com sucesso!")
                         setBtnClicked(false)
-                        navigate("/")
+                        navigate("/sing-in")
 
                     })
                     require.catch(err => {
@@ -67,7 +67,7 @@ export default function SingUpPage() {
                      data-test="username" 
                     type="text"
                     value={userName}
-                    placeholder="Nome"
+                    placeholder="username"
                     disabled={btnClicked}
                     required
                     onChange={e => setUserName(e.target.value)}

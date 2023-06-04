@@ -34,8 +34,8 @@ export default function Header() {
         setArrowActive(true);
     }
     function logout() {
-        localStorage.removeItem("auth");
-        navigate('/');
+        localStorage.removeItem("user");
+        navigate('/sign-in');
     }
     function logoutPosition() {
         const userRect = userRef.current.getBoundingClientRect();
