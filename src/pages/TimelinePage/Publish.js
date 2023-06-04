@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { CommentInput, LinkInput, PublishButton, PublishContainer, PublishTitle } from "./TimelineStyle";
 import axios from "axios";
-
 export default function Publish({ setAtt, att }) {
     const [post_link, setPost_link] = useState()
     const [post_comment, setPost_comment] = useState()

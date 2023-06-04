@@ -3,7 +3,8 @@ import styled from "styled-components"
 export const TimelineContainer = styled.section`
   margin-top:72px;
   background-color:#333;
-  height: 100vh;
+  min-height: 100vh;
+  max-height:min-content;
   max-width:100%;
   display: flex;
   flex-direction: column;
@@ -61,6 +62,7 @@ flex-direction:column;
 padding:21px 22px 16px 87px;
 box-sizing:border-box;
 position:relative;
+margin-bottom:30px;
 input::placeholder{
   font-family: 'Lato';
   font-style: normal;
@@ -129,6 +131,12 @@ font-weight: 700;
 font-size: 14px;
 line-height: 17px;
 color: #FFFFFF;
+bottom:16px;
+right:22px;
+@media (max-width: 611px) {
+  bottom:12px;
+  right:15px;
+}
 `
 
 export const Post = styled.button`
