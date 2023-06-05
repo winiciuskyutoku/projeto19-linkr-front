@@ -10,7 +10,6 @@ import axios from "axios"
 export default function HashtagPage() {
     const page = useParams()
     const [postData, setPostData] = useState(null)
-    console.log(page, postData)
     useEffect(() => {
         axios.get(`${process.env.REACT_APP_RENDER_URL}/hashtags/${page.hashtag}`)
             .then(sucess => setPostData(sucess.data))
