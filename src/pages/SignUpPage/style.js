@@ -24,10 +24,12 @@ export const BannerContainer = styled.div`
     justify-content: center;
     padding-left: 10%;
     h1{    
+        font-family: 'Passion One';
         font-weight: 700;
         font-size: 106px;
     }
     p {
+        font-family: 'Passion One';
         font-weight: 700;
         font-size: 43px;
         width: 60%;

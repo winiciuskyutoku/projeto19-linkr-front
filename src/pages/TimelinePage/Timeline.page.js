@@ -16,8 +16,10 @@ export default function TimelinePage() {
   const [displayDiv, setDisplayDiv] = useState(false);
   const [postData, setPostData] = useState(null)
   useEffect(() => {
-    axios.get(`http://localhost:4000/get-posts`).then(sucess => setPostData(sucess.data)).catch(fail => setPostData(fail.code))
-  }, [])
+    axios.get(`${process.env.REACT_APP_RENDER_URL}/get-posts`)
+    .then(sucess => setPostData(sucess.data))
+    .catch(fail => setPostData(fail.code))
+  }, [att])
 
   let initialX = null;
 
@@ -44,7 +46,7 @@ export default function TimelinePage() {
   return (
     <TimelineContainer onClick={()=>setDisplayDiv(false)} onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
       <Header />
-      <Hashtags displayDiv={displayDiv}/>
+      <Hashtags displayDiv={displayDiv} att={att}/>
       <TitleContainer>
         <StyledH2>timeline</StyledH2>
       </TitleContainer>

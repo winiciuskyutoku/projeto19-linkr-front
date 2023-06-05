@@ -6,7 +6,7 @@ import { UserContext } from "./context/UserContext.jsx";
 import { GuestContext } from "./context/GuestContext.jsx";
 import { useState } from "react";
 import UserPage from "./pages/UserPage/UserPage.js";
-import HashtagPage from "./pages/TimelinePage/HashtagPage.js";
+import HashtagPage from "./pages/HashtagPage/HashtagPage.js";
 
 
 
@@ -19,7 +19,8 @@ function App() {
       <UserContext.Provider value={{user, setUser}}>
         <BrowserRouter>
           <Routes>
-                  <Route path="/" element={<SignInPage />} exact/>
+                  <Route path="/" element={<SignInPage />} />
+                  <Route path="/sign-in" element={<SignInPage />} exact/>
                   <Route path="/sign-up" element={<SignUpPage />} />
                   <Route path="/timeline" element={<TimelinePage />} />
                   <Route path="/user-page/:id" element={<UserPage />} />

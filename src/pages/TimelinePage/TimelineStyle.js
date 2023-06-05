@@ -4,7 +4,8 @@ import {BsFillTrashFill} from "react-icons/bs"
 export const TimelineContainer = styled.section`
   margin-top:72px;
   background-color:#333;
-  height: 100vh;
+  min-height: 100vh;
+  max-height:min-content;
   max-width:100%;
   display: flex;
   flex-direction: column;
@@ -63,6 +64,7 @@ flex-direction:column;
 padding:21px 22px 16px 87px;
 box-sizing:border-box;
 position:relative;
+margin-bottom:30px;
 input::placeholder{
   font-family: 'Lato';
   font-style: normal;
@@ -131,6 +133,12 @@ font-weight: 700;
 font-size: 14px;
 line-height: 17px;
 color: #FFFFFF;
+bottom:16px;
+right:22px;
+@media (max-width: 611px) {
+  bottom:12px;
+  right:15px;
+}
 `
 
 export const Post = styled.button`
@@ -148,6 +156,10 @@ export const Post = styled.button`
     width: 50px;
     height: 50px;
     border-radius: 26px;
+  }
+  @media (max-width:611px) {
+    width:100%;
+    border-radius: 0;
   }
 `
 
@@ -170,6 +182,15 @@ export const PostContent = styled.div`
   h2{
     font-size: 17px;
     color: #B7B7B7;
+  }
+  a,strong{
+    text-decoration:none;
+    color:#fff;
+    font-weight:700;
+    :hover{
+      cursor: pointer;
+      color: #4D4D4D;
+    }
   }
   div{
     border: 1px solid #4D4D4D;
