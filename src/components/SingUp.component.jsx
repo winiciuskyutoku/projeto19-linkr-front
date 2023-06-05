@@ -48,7 +48,8 @@ export default function SingUpPage() {
                     console.log(err.message) 
                 }
 
-            } else {
+            } else { +
+                
                 alert("a senha e a confirmação de senha tem que ser iguais!")
             }
         } else {
