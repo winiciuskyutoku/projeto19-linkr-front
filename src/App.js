@@ -6,7 +6,7 @@ import { UserContext } from "./context/UserContext.jsx";
 import { GuestContext } from "./context/GuestContext.jsx";
 import { useState } from "react";
 import UserPage from "./pages/UserPage/UserPage.js";
-import HashtagPage from "./pages/TimelinePage/HashtagPage.js";
+import HashtagPage from "./pages/HashtagPage/HashtagPage.js";
 
 
 
