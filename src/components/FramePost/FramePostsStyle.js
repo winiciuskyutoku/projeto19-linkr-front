@@ -8,6 +8,7 @@ export const FramePost = styled.div`
     border-radius: 10px;
     margin-bottom: 5%;
     background: #171717;
+    position: relative;
 `;
 
 export const NotLikedIcon = styled(AiOutlineHeart)`
