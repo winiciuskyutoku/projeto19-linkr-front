@@ -50,8 +50,8 @@ export default function TimelinePage() {
       </TitleContainer>
       <ContainerContent>
         <Publish att={att} setAtt={setAtt} />
+        <TimeLinePost postData={postData}></TimeLinePost>
       </ContainerContent>
-      <TimeLinePost postData={postData}></TimeLinePost>
     </TimelineContainer>
   )
 }

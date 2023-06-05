@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import {BsFillTrashFill} from "react-icons/bs"
 
 export const TimelineContainer = styled.section`
   margin-top:72px;
@@ -45,6 +46,7 @@ flex-direction:column;
 align-items:flex-start;
 width: 937px;
 margin: 43px auto 29px auto;
+gap: 15px;
 @media (max-width:937px) {
   width:100%;
   align-items:center;
@@ -141,7 +143,7 @@ export const Post = styled.button`
   justify-content: space-between;
   padding: 18px;
   box-sizing: border-box;
-  margin-bottom: 10px;
+  position: relative;
   img {
     width: 50px;
     height: 50px;
@@ -172,15 +174,23 @@ export const PostContent = styled.div`
   div{
     border: 1px solid #4D4D4D;
     display: flex;
+    width: 100%;
     border-radius: 11px;
     height: 155px; 
     box-sizing: border-box;
-    img {
+    div:nth-child(2){
       height: 100%;
-      width: 155px;
+      width: 200px;
       border-radius: 0px 11px 11px 0px;
+      box-sizing: border-box;
+      border: none;
+      img {
+        width: 100%;
+        height: 100%;
+        border-radius: 0px 11px 11px 0px;
+      }
     }
-    div{
+    div:first-child{
       display: flex;
       flex-direction: column;
       border: none;
@@ -188,16 +198,20 @@ export const PostContent = styled.div`
       padding: 20px;
       box-sizing: border-box;
       gap: 5px;
+      text-overflow: ellipsis;
+      
       h2{
         color: #cecece;
         font-size: 16px;
         font-weight: 400;
         overflow: hidden;
+        text-overflow: ellipsis;
+        line-height: 18px;
+        height: 100%;
       }
       p {
         color: #9B9595;
         font-size: 11px;
-        text-overflow: ellipsis;
       }
       a{
         font-size: 11px;
@@ -283,4 +297,12 @@ h2{
   line-height: 40px;
   color: #FFFFFF;
 }
+`
+
+export const StyledTrash = styled(BsFillTrashFill)`
+  color: white;
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  right: 18px;
 `
