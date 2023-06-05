@@ -41,7 +41,7 @@ export default function UserPage() {
         }
 
         const config = { headers: { Authorization: `Bearer ${lsUser.user_token}` } }
-        axios.delete(`http://localhost:4000/delete-post/${user_id}/${id}`, config).then(sucess => console.log(sucess)).catch(fail => console.log(fail))
+        axios.delete(`${process.env.REACT_APP_RENDER_URL}/${user_id}/${id}`, config).then(sucess => console.log(sucess)).catch(fail => console.log(fail))
     }
 
     return (
