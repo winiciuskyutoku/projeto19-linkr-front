@@ -1,5 +1,12 @@
-import { Post, PostContent, Loading } from "./TimelineStyle"
+
+import urlMetadata from "url-metadata"
+import { Post, PostContent, Loading, StyledTrash } from "./TimelineStyle"
+import { PublishContainer } from "./TimelineStyle"
 import { useNavigate } from "react-router-dom"
+import axios from "axios";
+import { useState } from "react";
+import Modal, { ModalProvider, BaseModalBackground } from "styled-react-modal"
+import styled from "styled-components";
 
 export default function TimeLinePost({ postData }) {
     const navigate = useNavigate()
@@ -28,6 +35,17 @@ export default function TimeLinePost({ postData }) {
                 There are no posts yet
             </Loading>
         )
+    }
+
+    function deletePost(id, user_id, toggleModal) {
+        const lsUser = JSON.parse(localStorage.getItem('user'))
+        if (lsUser.user_id !== user_id){
+            alert("Voce nao pode excluir esse post")
+            return toggleModal()
+        }
+
+        const config = { headers: { Authorization: `Bearer ${lsUser.user_token}` } }
+        axios.delete(`http://localhost:4000/delete-post/${user_id}/${id}`, config).then(sucess => console.log(sucess)).catch(fail => console.log(fail))
     }
 
     return (
@@ -60,4 +78,3 @@ export default function TimeLinePost({ postData }) {
             })}
         </>
     )
-}
