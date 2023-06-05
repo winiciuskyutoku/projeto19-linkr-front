@@ -1,12 +1,7 @@
 
-import urlMetadata from "url-metadata"
 import { Post, PostContent, Loading, StyledTrash } from "./TimelineStyle"
-import { PublishContainer } from "./TimelineStyle"
 import { useNavigate } from "react-router-dom"
 import axios from "axios";
-import { useState } from "react";
-import Modal, { ModalProvider, BaseModalBackground } from "styled-react-modal"
-import styled from "styled-components";
 
 export default function TimeLinePost({ postData }) {
     const navigate = useNavigate()
