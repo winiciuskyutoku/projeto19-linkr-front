@@ -3,23 +3,22 @@ import { BackHashtag, ContainerHashtags, HashtagTitle } from "./TimelineStyle";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-export default function Hashtags({ displayDiv, att }) {
+export default function Hashtags({ displayDiv, att, exist }) {
     const [hashtags, setHashtags] = useState([])
     useEffect(() => {
         axios.get(`${process.env.REACT_APP_RENDER_URL}/hashtags`)
             .then((res) => {
-                console.log(res.data)
                 setHashtags(res.data)
             })
             .catch((err) => {
-                console.log(err.response.data)
+                alert(err.response.data)
             })
     }, [att])
 
     if (!hashtags || hashtags.length === 0) {
         return (
-            <BackHashtag displayDiv={displayDiv}>
-                <ContainerHashtags displayDiv={displayDiv} >
+            <BackHashtag exist={exist} displayDiv={displayDiv}>
+                <ContainerHashtags data-test='trending' exist={exist} displayDiv={displayDiv} >
                     <HashtagTitle>
                         <h2>trending</h2>
                     </HashtagTitle>
@@ -28,13 +27,13 @@ export default function Hashtags({ displayDiv, att }) {
         )
     }
     return (
-        <BackHashtag displayDiv={displayDiv}>
-            <ContainerHashtags displayDiv={displayDiv}>
+        <BackHashtag exist={exist} displayDiv={displayDiv}>
+            <ContainerHashtags data-test='trending' exist={exist} displayDiv={displayDiv}>
                 <HashtagTitle>
                     <h2>trending</h2>
                 </HashtagTitle>
                 {hashtags.map((h) =>
-                    <Link to={`/hashtag/${h.hashtag_tag.replace('#', '')}`} key={h.hashtag_id}>{h.hashtag_tag}</Link>)}
+                    <Link data-test='hashtag' to={`/hashtag/${h.hashtag_tag.replace('#', '')}`} key={h.hashtag_id}>{h.hashtag_tag}</Link>)}
             </ContainerHashtags>
         </BackHashtag>
     )
