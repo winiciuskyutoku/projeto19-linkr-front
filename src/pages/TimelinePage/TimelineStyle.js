@@ -155,6 +155,10 @@ export const Post = styled.button`
     height: 50px;
     border-radius: 26px;
   }
+  @media (max-width:611px) {
+    width:100%;
+    border-radius: 0;
+  }
 `
 
 export const PostContent = styled.div`
@@ -176,6 +180,15 @@ export const PostContent = styled.div`
   h2{
     font-size: 17px;
     color: #B7B7B7;
+  }
+  a,strong{
+    text-decoration:none;
+    color:#fff;
+    font-weight:700;
+    :hover{
+      cursor: pointer;
+      color: #4D4D4D;
+    }
   }
   div{
     border: 1px solid #4D4D4D;

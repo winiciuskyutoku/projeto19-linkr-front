@@ -3,7 +3,7 @@ import { BackHashtag, ContainerHashtags, HashtagTitle } from "./TimelineStyle";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-export default function Hashtags({ displayDiv }) {
+export default function Hashtags({ displayDiv, att }) {
     const [hashtags, setHashtags] = useState([])
     useEffect(() => {
         axios.get(`${process.env.REACT_APP_RENDER_URL}/hashtags`)
@@ -14,7 +14,7 @@ export default function Hashtags({ displayDiv }) {
             .catch((err) => {
                 console.log(err.response.data)
             })
-    }, [])
+    }, [att])
 
     if (!hashtags || hashtags.length === 0) {
         return (
