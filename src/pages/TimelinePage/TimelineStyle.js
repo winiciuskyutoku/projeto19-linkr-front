@@ -10,9 +10,9 @@ export const TimelineContainer = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-@media (max-width: 611px) {
+@media (max-width: 937px) {
   width:100%;
-  height:100vh;
+  height:min-content;
 }
 `
 
@@ -59,12 +59,23 @@ box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 border-radius: 16px;
 width:611px;
 height:210px;
-display:flex;
+display:${props=>props.exist?'flex':'none'};
 flex-direction:column;
 padding:21px 22px 16px 87px;
 box-sizing:border-box;
 position:relative;
 margin-bottom:30px;
+img{
+  background-color: #fff;
+  border: solid 1px rgba(255, 255, 255, 0.5);
+  border-radius: 60px;
+  object-fit: cover;
+  width:50px;
+  height:50px;
+  position:absolute;
+  top:16px;
+  left:18px;
+}
 input::placeholder{
   font-family: 'Lato';
   font-style: normal;
@@ -182,6 +193,9 @@ export const PostContent = styled.div`
   h2{
     font-size: 17px;
     color: #B7B7B7;
+    @media (max-width:611px) {
+      font-size:15px;
+    }
   }
   a,strong{
     text-decoration:none;
@@ -256,6 +270,7 @@ export const Loading = styled.div`
 } */
 
 export const ContainerHashtags = styled.div`
+display:${props=>props.exist?'flex':'none'};
 background: #171717;
 border-radius: 16px;
 width:301px;
@@ -288,6 +303,7 @@ a{
 }
 `
 export const BackHashtag = styled.div`
+display:${props=>props.exist?'flex':'none'};
 position:fixed;
 top:72px;
 right:0;

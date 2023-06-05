@@ -15,6 +15,7 @@ export default function TimelinePage() {
   const [att, setAtt] = useState(true)
   const [displayDiv, setDisplayDiv] = useState(false);
   const [postData, setPostData] = useState(null)
+  const exist = JSON.parse(localStorage.getItem("user")).user_token
   useEffect(() => {
     axios.get(`${process.env.REACT_APP_RENDER_URL}/get-posts`)
     .then(sucess => setPostData(sucess.data))
@@ -46,12 +47,12 @@ export default function TimelinePage() {
   return (
     <TimelineContainer onClick={()=>setDisplayDiv(false)} onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
       <Header />
-      <Hashtags displayDiv={displayDiv} att={att}/>
+      <Hashtags displayDiv={displayDiv} att={att} exist={exist}/>
       <TitleContainer>
         <StyledH2>timeline</StyledH2>
       </TitleContainer>
       <ContainerContent>
-        <Publish att={att} setAtt={setAtt} />
+        <Publish att={att} setAtt={setAtt} exist={exist}/>
         <TimeLinePost postData={postData}></TimeLinePost>
       </ContainerContent>
     </TimelineContainer>
