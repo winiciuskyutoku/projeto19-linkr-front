@@ -1,8 +1,9 @@
 import axios from "axios";
 import { FramePost, NotLikedIcon, LikedIcon, LikeImagePost, DataPost, TooltipText, TooltipBox } from "./FramePostsStyle";
 import { useEffect, useState } from "react";
+import { FancyModalButton } from "../../pages/UserPage/UserPage";
 
-export default function FramePosts({ p, likes, user, setReload }) {
+export default function FramePosts({ p, likes, user, setReload, postId, userId, deletePost }) {
     const { user_photo, username, post_comment, post_link, post_id } = p;
     const [liked, setLiked] = useState(null);
     const [likesAmount, setLikesAmount] = useState(0);
@@ -21,9 +22,9 @@ export default function FramePosts({ p, likes, user, setReload }) {
                 names.push(l.username_liked);
             }
         });
-        if(names.length>2){
-            setNamesLiked(names.slice(0, 2).join(', ')+` e outras ${names.length-2} pessoas`);
-        }else{
+        if (names.length > 2) {
+            setNamesLiked(names.slice(0, 2).join(', ') + ` e outras ${names.length - 2} pessoas`);
+        } else {
             setNamesLiked(names.slice(0, 2).join(' e '));
         }
     }, [likes]);
@@ -42,6 +43,7 @@ export default function FramePosts({ p, likes, user, setReload }) {
 
     return (
         <FramePost>
+            <FancyModalButton userId={userId} postId={postId} deletePost={deletePost}></FancyModalButton>
             <LikeImagePost>
                 <img src={user_photo} alt="" />
                 {liked ? <LikedIcon onClick={like} /> : <NotLikedIcon onClick={like} />}
@@ -51,6 +53,7 @@ export default function FramePosts({ p, likes, user, setReload }) {
             <DataPost>
                 <h1>{username}</h1>
                 <h2>{post_comment}</h2>
+                
                 <div>
                     <div>
                         <h2>{p.title.slice(0, 150)}{p.title.length > 150 && '...'}</h2>
@@ -60,6 +63,7 @@ export default function FramePosts({ p, likes, user, setReload }) {
                     <img src={p.image}></img>
                 </div>
             </DataPost>
+            
         </FramePost>
     );
 }
