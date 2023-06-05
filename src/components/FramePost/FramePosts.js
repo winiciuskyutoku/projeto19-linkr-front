@@ -42,7 +42,7 @@ export default function FramePosts({ p, likes, user, setReload, postId, userId, 
     }
 
     return (
-        <FramePost>
+        <FramePost data-test="post">
             <FancyModalButton userId={userId} postId={postId} deletePost={deletePost}></FancyModalButton>
             <LikeImagePost>
                 <img src={user_photo} alt="" />
