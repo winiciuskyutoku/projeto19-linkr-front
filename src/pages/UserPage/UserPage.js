@@ -25,6 +25,7 @@ export default function UserPage() {
         const url = `${process.env.REACT_APP_RENDER_URL}/profile-user/${id}`;
 
         axios.get(url).then((sucess) => {
+            console.log(sucess.data)
             setUserProfile(sucess.data.profile);
             setLikesPosts(sucess.data.likes);
         }).catch((error) => {
@@ -45,35 +46,37 @@ export default function UserPage() {
 
     return (
         <>
-            <Header />
-            <ContainerProfile>
-                <UserName>
-                    <UserPicture>
-                        {userProfile ? <img src={userProfile[0].user_photo} alt="" /> : ''}
-                    </UserPicture>
-                    <StyledH2>{userProfile ? `${userProfile[0].username}'s posts` : ''}</StyledH2>
-                </UserName>
-                <ContainerMain>
-                    <ContainerPost>
-                        {userProfile ?
-                            userProfile[0].post_id !== null ?
-                            userProfile.map((p) => <FramePosts key={p.post_id} p={p} likes={likesPosts} user={user} setReload={setReload}/>)
-                            :
-                            <FrameNoPost>
-                                <h1>Ainda não há postagens</h1>
-                            </FrameNoPost>
-                            :
-                            <LoadingThreeDots/>
-                        }
-                    </ContainerPost>
-                    <Hashtags />
-                </ContainerMain>
-            </ContainerProfile>
+            <ModalProvider backgroundComponent={FadingBackground}>
+                <Header />
+                <ContainerProfile>
+                    <UserName>
+                        <UserPicture>
+                            {userProfile ? <img src={userProfile[0].user_photo} alt="" /> : ''}
+                        </UserPicture>
+                        <StyledH2>{userProfile ? `${userProfile[0].username}'s posts` : ''}</StyledH2>
+                    </UserName>
+                    <ContainerMain>
+                        <ContainerPost>
+                            {userProfile ?
+                                userProfile[0].post_id !== null ?
+                                    userProfile.map((p) => <FramePosts key={p.post_id} p={p} likes={likesPosts} user={user} setReload={setReload} deletePost={deletePost} postId={userProfile[0].post_id} userId={id}/> )
+                                    :
+                                    <FrameNoPost>
+                                        <h1>Ainda não há postagens</h1>
+                                    </FrameNoPost>
+                                :
+                                <LoadingThreeDots />
+                            }
+                        </ContainerPost>
+                        <Hashtags />
+                    </ContainerMain>
+                </ContainerProfile>
+            </ModalProvider>
         </>
     );
 }
 
-function FancyModalButton({ deletePost, userId, postId }) {
+export function FancyModalButton({ deletePost, userId, postId }) {
     const [isOpen, setIsOpen] = useState(false);
     const [opacity, setOpacity] = useState(0);
 
