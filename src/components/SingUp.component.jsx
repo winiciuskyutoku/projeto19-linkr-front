@@ -110,8 +110,9 @@ export default function SingUpPage() {
                 />
                 <StyledButton
                      data-test="sign-up-btn" 
-                    onClick={(e) => registerUser(e)}
-                    type="submit"> {
+                     disabled={btnClicked}
+                     onClick={(e) => registerUser(e)}
+                    type="submit" > {
                         btnClicked ?
                             (<TailSpin
                                 height="50"

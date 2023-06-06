@@ -19,9 +19,9 @@ export default function BannerLogin(){
 }
 
 const LoginContainer = styled.div `
-    margin-top:5px;
+  
     display:flex;
-    min-width:80%;
+    min-width:70%;
     flex-direction: column;
     background-color: #151515;
     align-items:center;

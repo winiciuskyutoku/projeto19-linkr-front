@@ -131,8 +131,8 @@ const generateGuestAccess = ()=>{
 }
 
 const LoginContainer = styled.div `
-    margin-top:5px;
     display:flex;
+    width:30%;
     flex-direction: column;
     background-color: #333333;
     align-items:center;
