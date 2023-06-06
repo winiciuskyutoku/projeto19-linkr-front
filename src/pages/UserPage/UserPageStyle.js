@@ -2,8 +2,9 @@ import styled from "styled-components";
 
 export const ContainerProfile = styled.div`
     width:100%;
-    height: 100vh;
     background-color:#333;
+    min-height: 100vh;
+    max-width:100%;
     
     display: flex;
     flex-direction: column;

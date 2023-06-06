@@ -34,7 +34,7 @@ export default function SingUpPage() {
                     require.then(res => {
                         alert("usuário Cadastrado com sucesso!")
                         setBtnClicked(false)
-                        navigate("/")
+                        navigate("/sign-in")
 
                     })
                     require.catch(err => {
@@ -48,7 +48,7 @@ export default function SingUpPage() {
                     console.log(err.message) 
                 }
 
-         
+          
         } else {
             alert("formato de email invalido!")
         }

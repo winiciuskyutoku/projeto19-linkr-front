@@ -37,6 +37,7 @@ export default function LoginPage(){
            
             const {user_id , username, user_photo, user_token} = res.data
             localStorage.setItem("user" , JSON.stringify({user_id:user_id , username:username, user_photo:user_photo, user_token:user_token}))
+            localStorage.setItem('user_token', user_token)
             setUser({user_id:user_id , username:username, user_photo:user_photo, user_token:user_token}) 
             navigate("/timeline")
         })
@@ -136,6 +137,7 @@ const LoginContainer = styled.div `
     flex-direction: column;
     background-color: #333333;
     align-items:center;
+    min-width:600px;
 
 `
 const StyledButton = styled.button`
