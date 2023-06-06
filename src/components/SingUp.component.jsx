@@ -22,7 +22,7 @@ export default function SingUpPage() {
                 return alert("Senha que ter no minimo 6 caracteres!")
             }
 
-            if (userPassword === confirmPwd) {
+            
                 e.preventDefault()
                 setBtnClicked(true);
 
@@ -48,9 +48,7 @@ export default function SingUpPage() {
                     console.log(err.message) 
                 }
 
-            } else {
-                alert("a senha e a confirmação de senha tem que ser iguais!")
-            }
+         
         } else {
             alert("formato de email invalido!")
         }
@@ -90,15 +88,6 @@ export default function SingUpPage() {
                     required
                     onChange={e => setUserPassword(e.target.value)}
                 ></input>
-                <input
-
-                    type="password"
-                    value={confirmPwd}
-                    placeholder="Confirme a senha"
-                    disabled={btnClicked}
-                    required
-                    onChange={e => setConfirmPwd(e.target.value)}
-                />
                 <input  
                     data-test="picture-url" 
                     type="url"
