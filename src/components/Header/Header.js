@@ -72,6 +72,7 @@ export default function Header() {
                 debounceTimeout={300}
                 onChange={(e) => research(e)}
                 inputRef={researchRef}
+                data-test="search"
             />
             {
                 searchValue.length === 0 ? '' :
@@ -81,8 +82,8 @@ export default function Header() {
                             <Item key={index} onClick={() => {
                                 setSearchValue('');
                                 navigate(`/user-page/${profile.user_id}`);
-                            }}>
-                                <img data-test="avatar" src={profile.user_photo} alt="" />
+                            }} data-test="user-search">
+                                <img src={profile.user_photo} alt="" />
                                 <p>{profile.username}</p>
                             </Item>
                         ))}
@@ -93,18 +94,18 @@ export default function Header() {
                 arrowActive ?
                     <User ref={userRef}>
                         <ArrowUp onClick={() => setArrowActive(false)} />
-                        <img src={userImage} alt="" onClick={() => setArrowActive(false)}/>
+                        <img data-test="avatar" src={userImage} alt="" onClick={() => setArrowActive(false)}/>
                     </User>
                     :
                     <User ref={userRef}>
                         <ArrowDown onClick={(e) => active(e)} />
-                        <img src={userImage} alt="" onClick={(e) => active(e)}/>
+                        <img data-test="avatar" src={userImage} alt="" onClick={(e) => active(e)}/>
                     </User>
 
             }
             {arrowActive &&
-                <span style={{ ...logoutPosition() }}>
-                    <p onClick={()=>logout()}>Logout</p>
+                <span style={{ ...logoutPosition() }} data-test="menu">
+                    <p onClick={()=>logout()} data-test="logout">Logout</p>
                 </span>
             }
         </ContainerHeader>

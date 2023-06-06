@@ -8,6 +8,7 @@ export const FramePost = styled.div`
     border-radius: 10px;
     margin-bottom: 5%;
     background: #171717;
+    position: relative;
 `;
 
 export const NotLikedIcon = styled(AiOutlineHeart)`
@@ -29,13 +30,39 @@ export const LikedIcon = styled(AiFillHeart)`
         color: white;
     }
 `;
+export const TooltipText = styled.p`
+    cursor: pointer;
+    color: #fff;
+    :hover{
+        color: #4D4D4D;
+    }
+`;
+export const TooltipBox = styled.div`
+    width: 250%;
+    position: absolute;
+    top: calc(50% + 20px);
+    background-color: white;
+    border-radius: 4px;
+    visibility: hidden;
+    transition: visibility 0.2s, color 0.5s, background-color 0.5s, width 0.5s, padding 0.5s ease-in-out;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    h1{
+        color: #000;
+    }
+`;
 export const LikeImagePost = styled.div`
     width: 10%;
     height: 100%;
+
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    
+    position: relative;
     
     img{
         width: 75%;
@@ -52,7 +79,14 @@ export const LikeImagePost = styled.div`
             color: #4D4D4D;
         }
     }
+    p:hover + ${TooltipBox} {
+        visibility: visible;
+        color: #000;
+        background-color: rgba(255, 255, 255, 0.8);
+        padding: 10%;
+    }
 `;
+
 export const DataPost = styled.div`
     width: 90%;
     padding: 2%;
