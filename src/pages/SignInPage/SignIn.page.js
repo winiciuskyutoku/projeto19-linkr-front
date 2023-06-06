@@ -8,7 +8,6 @@ export default function SignInPage() {
     <>
     
     <SingInContainer>
-    
      <BannerLogin/>
      <LoginPage/>
     </SingInContainer>
@@ -20,7 +19,7 @@ export default function SignInPage() {
 
 const SingInContainer = styled.section`
   height: 100vh;
-  max-width:85%;
+  width:100%;
   display: flex;
   background-color:black;
   flex-direction: row;

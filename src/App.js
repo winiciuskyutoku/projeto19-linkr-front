@@ -19,8 +19,8 @@ function App() {
       <UserContext.Provider value={{user, setUser}}>
         <BrowserRouter>
           <Routes>
-                  <Route path="/" element={<SignInPage />} />
-                  <Route path="/sign-in" element={<SignInPage />} exact/>
+                  <Route path="/" element={<SignInPage exact />} />
+                  <Route path="/sign-in" element={<SignInPage />} />
                   <Route path="/sign-up" element={<SignUpPage />} />
                   <Route path="/timeline" element={<TimelinePage />} />
                   <Route path="/user-page/:id" element={<UserPage />} />
