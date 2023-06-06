@@ -51,6 +51,7 @@ export default function LoginPage(){
             alert('formato de email inválido!')
             setEmail("")
             setPassword("")
+            navigate('/')
         }
 
 
