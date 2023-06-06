@@ -137,6 +137,7 @@ const LoginContainer = styled.div `
     flex-direction: column;
     background-color: #333333;
     align-items:center;
+    min-width:600px;
 
 `
 const StyledButton = styled.button`
