@@ -3,9 +3,9 @@ import { FramePost, NotLikedIcon, LikedIcon, LikeImagePost, DataPost, TooltipTex
 import { useEffect, useState } from "react";
 import { FancyModalButton } from "../../pages/UserPage/UserPage";
 
-export default function FramePosts({ p, likes, user, setReload, postId, userId, deletePost }) {
+export default function FramePosts({ p, likes, user, postId, userId, deletePost }) {
     const { user_photo, username, post_comment, post_link, post_id } = p;
-    const [liked, setLiked] = useState(null);
+    const [liked, setLiked] = useState(false);
     const [likesAmount, setLikesAmount] = useState(0);
     const [namesLiked, setNamesLiked] = useState();
     const config = user.user_token && { headers: { Authorization: `Bearer ${user.user_token}` } };
@@ -33,7 +33,6 @@ export default function FramePosts({ p, likes, user, setReload, postId, userId, 
         const url = `${process.env.REACT_APP_RENDER_URL}/like-post/${post_id}`;
 
         axios.post(url, {}, config).then((sucess) => {
-            setReload(likes.length);
             setLiked(!liked);
             (liked ? setLikesAmount(likesAmount - 1) : setLikesAmount(likesAmount + 1))
         }).catch((error) => {
