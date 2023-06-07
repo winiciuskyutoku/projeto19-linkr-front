@@ -51,6 +51,7 @@ export default function LoginPage(){
             alert('formato de email inválido!')
             setEmail("")
             setPassword("")
+            navigate('/')
         }
 
 
@@ -132,11 +133,12 @@ const generateGuestAccess = ()=>{
 }
 
 const LoginContainer = styled.div `
-    margin-top:5px;
     display:flex;
+    width:30%;
     flex-direction: column;
     background-color: #333333;
     align-items:center;
+    min-width:600px;
 
 `
 const StyledButton = styled.button`
