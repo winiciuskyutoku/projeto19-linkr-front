@@ -16,14 +16,13 @@ import { LoadingCircle, LoadingThreeDots } from "../../components/Loading/Loadin
 export default function UserPage() {
     const [userProfile, setUserProfile] = useState(null);
     const [likesPosts, setLikesPosts] = useState(null);
+    const [realoadUser, setReloadUser] = useState(false);
 
     const { id } = useParams();
     const user = JSON.parse(localStorage.getItem("user"));
 
     useEffect(() => {
         const url = `${process.env.REACT_APP_RENDER_URL}/profile-user/${id}`;
-        setUserProfile(null);
-        setLikesPosts(null);
 
         axios.get(url).then((sucess) => {
             setUserProfile(sucess.data.profile);
@@ -31,7 +30,7 @@ export default function UserPage() {
         }).catch((error) => {
             console.log(error.response);
         });
-    }, [id]);
+    }, [realoadUser, id]);
 
     function deletePost(id, user_id, toggleModal) {
         const lsUser = JSON.parse(localStorage.getItem('user'))
@@ -54,7 +53,7 @@ export default function UserPage() {
                         <ContainerPost>
                             {userProfile ?
                                 userProfile[0].post_id !== null ?
-                                    userProfile.map((p) => <FramePosts key={p.post_id} p={p} likes={likesPosts} user={user} deletePost={deletePost} postId={userProfile[0].post_id} userId={id} />)
+                                    userProfile.map((p) => <FramePosts key={p.post_id} p={p} likes={likesPosts} user={user} deletePost={deletePost} postId={userProfile[0].post_id} userId={id} setReloadUser={setReloadUser}/>)
                                     :
                                     <FrameNoPost>
                                         <h1>Ainda não há postagens</h1>

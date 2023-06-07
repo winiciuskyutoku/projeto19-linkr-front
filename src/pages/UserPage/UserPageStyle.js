@@ -22,7 +22,7 @@ export const ContainerProfile = styled.div`
 export const ContainerMain = styled.div`
     width: 100%;
     padding: 0 10%;
-    margin-top: 5%;
+    margin-top: 3%;
     display: flex;
     /* align-items: center; */
     justify-content: space-between;
