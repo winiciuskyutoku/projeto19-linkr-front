@@ -29,24 +29,22 @@ export default function SingUpPage() {
                 const URL = `${process.env.REACT_APP_RENDER_URL}/sign-up`
 
                 const body = { name: userName, email: userEmail, password: userPassword, image: picture }
-                try {
+                
                     const require = axios.post(URL, body)
                     require.then(res => {
                         alert("usuário Cadastrado com sucesso!")
                         setBtnClicked(false)
-                        navigate("/sign-in")
+                        navigate("/")
 
                     })
                     require.catch(err => {
                         setBtnClicked(false)
                         console.log(err.message)
-                        {err.response.status.message === 409 && alert("email or username already registered/")}
+                        {err.response.message === 409 && alert("email or username already registered/")}
 
                     })
 
-                } catch (err) { 
-                    console.log(err.message) 
-                }
+              
 
           
         } else {
