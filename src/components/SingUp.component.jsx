@@ -22,33 +22,29 @@ export default function SingUpPage() {
                 return alert("Senha que ter no minimo 6 caracteres!")
             }
 
-            
+           
                 e.preventDefault()
                 setBtnClicked(true);
 
                 const URL = `${process.env.REACT_APP_RENDER_URL}/sign-up`
 
                 const body = { name: userName, email: userEmail, password: userPassword, image: picture }
-                try {
                     const require = axios.post(URL, body)
                     require.then(res => {
                         alert("usuário Cadastrado com sucesso!")
                         setBtnClicked(false)
-                        navigate("/sign-in")
+                        navigate("/")
 
                     })
                     require.catch(err => {
+                        err.response.status === 409 && alert("email or username already registered! ")
                         setBtnClicked(false)
-                        console.log(err.message)
-                        {err.response.status.message === 409 && alert("email or username already registered/")}
-
+                        window.location.reload(true);
+                       
                     })
 
-                } catch (err) { 
-                    console.log(err.message) 
-                }
+              
 
-          
         } else {
             alert("formato de email invalido!")
         }
@@ -56,6 +52,7 @@ export default function SingUpPage() {
 
 
     }
+ 
 
     return (
         <>
@@ -88,6 +85,7 @@ export default function SingUpPage() {
                     required
                     onChange={e => setUserPassword(e.target.value)}
                 ></input>
+            
                 <input  
                     data-test="picture-url" 
                     type="url"

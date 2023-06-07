@@ -12,6 +12,7 @@ export default function Header() {
     const userRef = useRef(null);
     const researchRef = useRef(null);
     const userImage = JSON.parse(localStorage.getItem("user")).user_photo;
+    const userId = JSON.parse(localStorage.getItem('user')).user_id;
     const navigate = useNavigate();
 
     function research(e) {
@@ -32,10 +33,11 @@ export default function Header() {
     function active(e) {
         e.stopPropagation();
         setArrowActive(true);
+        
     }
     function logout() {
         localStorage.removeItem("user");
-        navigate('/sign-in');
+        navigate('/');
     }
     function logoutPosition() {
         const userRect = userRef.current.getBoundingClientRect();
@@ -92,7 +94,7 @@ export default function Header() {
             }
             {
                 arrowActive ?
-                    <User ref={userRef}>
+                    <User ref={userRef} onClick={()=>{navigate(`/user-page/:${userId}`)}}>
                         <ArrowUp onClick={() => setArrowActive(false)} />
                         <img data-test="avatar" src={userImage} alt="" onClick={() => setArrowActive(false)}/>
                     </User>
