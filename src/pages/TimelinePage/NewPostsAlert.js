@@ -1,12 +1,25 @@
 import axios from "axios"
+import dayjs from "dayjs"
+import { useEffect } from "react"
 import { useState } from "react"
 import { BsArrowCounterclockwise } from "react-icons/bs"
 import styled from "styled-components"
 
-export default function NewPostsAlert({ exist, date }) {
+export default function NewPostsAlert({ exist, date, setDate, setLast_atualization }) {
     const [newPosts, setNewPosts] = useState(0)
     const body = { last_atualization: date }
     const config = { headers: { Authorization: `Bearer ${localStorage.getItem('user_token')}` } }
+
+    useEffect(()=>{
+        setDate(dayjs().format('YYYY-MM-DD HH:mm:ss'))
+        setLast_atualization(dayjs().format('YYYY-MM-DD HH:mm:ss'))
+    },[])
+
+    function atualizeDate(){
+        setDate(dayjs().format('YYYY-MM-DD HH:mm:ss'))
+        setLast_atualization(dayjs().format('YYYY-MM-DD HH:mm:ss'))
+    }
+
     if (localStorage.getItem('user_token')!=='guest_token') {
         setInterval(() => {
             axios.get(`${process.env.REACT_APP_RENDER_URL}/get-new-posts`, config, body)
@@ -20,7 +33,7 @@ export default function NewPostsAlert({ exist, date }) {
     return (
         <AlertNewPostContainer exist={exist}>
             <p>{newPosts} new posts, load more!</p>
-            <BsArrowCounterclockwise size={18} color="white" />
+            <BsArrowCounterclockwise onClick={atualizeDate} size={18} color="white" />
         </AlertNewPostContainer>
     )
 }

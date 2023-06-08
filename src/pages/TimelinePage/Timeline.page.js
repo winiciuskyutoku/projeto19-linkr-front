@@ -8,23 +8,34 @@ import { ContainerContent, StyledH2, TimelineContainer, TitleContainer } from ".
 import Hashtags from "./hashtags"
 import GuestContextHook from "../../hooks/GuestContext.Hook.jsx"
 import NewPostsAlert from "./NewPostsAlert"
-import dayjs from "dayjs"
 
 export default function TimelinePage() {
-  const {guest} = GuestContextHook();
+  const { guest } = GuestContextHook();
   console.log('GUEST', guest)
   //att será usado para atualizar a timeline
   const [att, setAtt] = useState(true)
   const [displayDiv, setDisplayDiv] = useState(false);
   const [postData, setPostData] = useState(null)
   const exist = JSON.parse(localStorage.getItem("user")).user_token
-  const [ date, setDate] = useState()
+  const [date, setDate] = useState()
+  const [last_atualization, setLast_atualization] = useState()
+  const config = { headers: { Authorization: `Bearer ${localStorage.getItem('user_token')}` } }
+  const body = {last_atualization}
   useEffect(() => {
-    setDate(dayjs().format('YYYY-MM-DD HH:mm:ss'))
-    axios.get(`${process.env.REACT_APP_RENDER_URL}/get-posts`)
-    .then(sucess => setPostData(sucess.data))
-    .catch(fail => setPostData(fail.code))
-  }, [att])
+    if (exist === 'guest_token') {
+      console.log(body)
+      axios.get(`${process.env.REACT_APP_RENDER_URL}/get-posts`, body)
+        .then(sucess => {
+          console.log(sucess)
+          setPostData(sucess.data)
+        })
+        .catch(fail => setPostData(fail.code))
+    }else{
+      axios.get(`${process.env.REACT_APP_RENDER_URL}/get-posts-login`, config, body)
+        .then(sucess => setPostData(sucess.data))
+        .catch(fail => setPostData(fail.code))
+    }
+  }, [att, date])
 
   let initialX = null;
 
@@ -49,15 +60,15 @@ export default function TimelinePage() {
   }
 
   return (
-    <TimelineContainer onClick={()=>setDisplayDiv(false)} onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
+    <TimelineContainer onClick={() => setDisplayDiv(false)} onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
       <Header />
-      <Hashtags displayDiv={displayDiv} att={att} exist={exist}/>
+      <Hashtags displayDiv={displayDiv} att={att} exist={exist} />
       <TitleContainer>
         <StyledH2>timeline</StyledH2>
       </TitleContainer>
       <ContainerContent>
-        <Publish att={att} setAtt={setAtt} exist={exist}/>
-        <NewPostsAlert exist={exist} date={date}/>
+        <Publish att={att} setAtt={setAtt} exist={exist} config={config}/>
+        <NewPostsAlert exist={exist} date={date} setDate={setDate} setLast_atualization={setLast_atualization} />
         <TimeLinePost postData={postData}></TimeLinePost>
       </ContainerContent>
     </TimelineContainer>

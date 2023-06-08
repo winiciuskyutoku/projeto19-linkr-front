@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { CommentInput, LinkInput, PublishButton, PublishContainer, PublishTitle } from "./TimelineStyle";
 import axios from "axios";
-export default function Publish({ setAtt, att, exist }) {
+export default function Publish({ setAtt, att, exist, config }) {
     const [post_link, setPost_link] = useState()
     const [post_comment, setPost_comment] = useState()
     const [disable, setDisable] = useState(false)
     const userImage = JSON.parse(localStorage.getItem("user")).user_photo
     console.log(exist==='guest_token')
-    const config = { headers: { Authorization: `Bearer ${localStorage.getItem('user_token')}` } }
+    
     const body = { post_comment, post_link }
     console.log('CONFIG',config, body)
     function handleForm(e) {
