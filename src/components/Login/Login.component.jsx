@@ -57,7 +57,7 @@ export default function LoginPage() {
                                         window.location.reload(true)
                                     })
                         } else {
-                            alert("email não cadastrado!")
+                            alert(" email não cadastrado!")
                             setEmail("")
                             setPassword("")
                             setBtnClicked(false)
@@ -79,7 +79,6 @@ export default function LoginPage() {
 
 
         }   else {
-
             alert('formato de email inválido!')
             setEmail("")
             setPassword("")
