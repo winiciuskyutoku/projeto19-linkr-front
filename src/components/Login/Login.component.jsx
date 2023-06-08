@@ -1,138 +1,169 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom"
 import { TailSpin } from 'react-loader-spinner'
 import styled from "styled-components";
 import UserContextHook from "../../hooks/UserContext.Hook.jsx";
 import GuestContextHook from "../../hooks/GuestContext.Hook.jsx";
-import axios  from 'axios'
+import axios from 'axios'
 
 import { Link } from "react-router-dom"
 
 
-export default function LoginPage(){
+export default function LoginPage() {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const {setUser} =UserContextHook()
-    const {setGuest} = GuestContextHook()
-    const [email , setEmail] = useState("")
+    const { setUser } = UserContextHook()
+    const { setGuest } = GuestContextHook()
+    const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const navigate = useNavigate();
-    const [btnClicked, setBtnClicked] = useState (false)
-   
-
-    
+    const [btnClicked, setBtnClicked] = useState(false)
+    const token = JSON.parse(localStorage.getItem("user"))?.user_token;
 
 
-    function login(e){
-     
-       if( emailRegex.test(email)){
-        e.preventDefault()
-        setBtnClicked(true)
+    useEffect(() => {
+        if (token) {
+            navigate("/timeline");
+        }
+    }, [navigate, token]);
+
+
+
+
+    function login(e) {
+
+        if (emailRegex.test(email) && password.length >= 6) {
+            setBtnClicked(true)
+                try {
+                    const URL = `${process.env.REACT_APP_RENDER_URL}/sign-up/${email}`
+                    const promise = axios.get(URL)
+                    promise.then(res => {
+                        if (res.data.user_email === email) {
+                                    e.preventDefault()
+                                    setBtnClicked(true)
+                                    const URL = `${process.env.REACT_APP_RENDER_URL}/sign-in`
+                                    const body = { email, password }
+                                    
+                                        const promise = axios.post(URL, body)
+                                        promise.then(res => {
+                                        const { user_id, username, user_photo, user_token } = res.data
+                                        localStorage.setItem("user", JSON.stringify({ user_id: user_id, username: username, user_photo: user_photo, user_token: user_token }))
+                                        localStorage.setItem('user_token', user_token)
+                                        setUser({ user_id: user_id, username: username, user_photo: user_photo, user_token: user_token })
+                                        navigate("/timeline")
+                                    
+                                    })
+                                    promise.catch(err => {
+                                        alert(err.response.data.message)
+                                        window.location.reload(true)
+                                    })
+                        } else {
+                            alert("email não cadastrado!")
+                            setEmail("")
+                            setPassword("")
+                            setBtnClicked(false)
+                        }
+                    
+
+                    })
         
-        const URL = `${process.env.REACT_APP_RENDER_URL}/sign-in`
-        const body ={email,password}
-        console.log(body);
-        const promise= axios.post(URL , body)
-        promise.then(res=>{
-            console.log(res.data)
-           
-            const {user_id , username, user_photo, user_token} = res.data
-            localStorage.setItem("user" , JSON.stringify({user_id:user_id , username:username, user_photo:user_photo, user_token:user_token}))
-            localStorage.setItem('user_token', user_token)
-            setUser({user_id:user_id , username:username, user_photo:user_photo, user_token:user_token}) 
-            navigate("/timeline")
-        })
+                    promise.catch(err => {
+                        alert("internal system error")
+                        alert(err.response.data.message)
+                        window.location.reload(true)
+                    })
+                }catch(err){
+                    alert("internal system error")
+                }
+                 
+                
 
-        promise.catch(err=>{
-            alert(err.response.data.message)
-            // window.location.reload(true)
-        })
-        
-        }else{
+
+        }   else {
+
             alert('formato de email inválido!')
             setEmail("")
             setPassword("")
-            navigate('/')
         }
-
-
+        
     }
 
+    const generateGuestAccess = () => {
+        localStorage.setItem("user",
+            JSON.stringify({
+                user_id: 999,
+                username: "guest",
+                user_photo: "https://cdn.onlinewebfonts.com/svg/img_83486.png",
+                user_token: "guest_token"
+            }))
 
-const generateGuestAccess = ()=>{
-    localStorage.setItem("user" , 
-    JSON.stringify({
-        user_id:999, 
-        username:"guest", 
-        user_photo:"https://cdn.onlinewebfonts.com/svg/img_83486.png", 
-        user_token:"guest_token"}))
-
-    setGuest({
-        user_id:999, 
-        username:"guest", 
-        user_photo:"https://cdn.onlinewebfonts.com/svg/img_83486.png", 
-        user_token:"guest_token"})
-    
+        setGuest({
+            user_id: 999,
+            username: "guest",
+            user_photo: "https://cdn.onlinewebfonts.com/svg/img_83486.png",
+            user_token: "guest_token"
+        })
 
 
-    navigate('/timeline')
+
+        navigate('/timeline')
+    }
+    return (
+
+
+        <LoginContainer>
+
+            <Form>
+                <input
+                    data-test="email"
+                    type="email"
+                    value={email}
+                    placeholder="Email"
+                    disabled={btnClicked}
+                    required
+                    onChange={e => setEmail(e.target.value)}
+                ></input>
+                <input
+                    data-test="password"
+                    type="password"
+                    value={password}
+                    placeholder="Senha"
+                    disabled={btnClicked}
+                    required
+                    onChange={e => setPassword(e.target.value)}
+                ></input>
+                <StyledButton data-test="login-btn" disabled={btnClicked} onClick={(e) => login(e)} type="submit">{
+                    btnClicked ?
+                        (<TailSpin
+                            height="50"
+                            width="50"
+                            color="#FFFFFF"
+                            ariaLabel="tail-spin-loading"
+                            radius="1"
+                            wrapperStyle={{}}
+                            wrapperClass=""
+                            visible={btnClicked}
+                        />) : ('Log In')
+                }</StyledButton>
+            </Form>
+
+
+            <StyledButton2 to="/timeline" onClick={() => { generateGuestAccess() }}>
+                Guest
+            </StyledButton2>
+
+            <Link to="/sign-up" data-test="sign-up-link">
+                <StyledH2>Gostaria de criar uma conta? Cadastre-se!</StyledH2>
+            </Link>
+
+        </LoginContainer>
+    )
+
+
+
+
 }
-   return (
 
-
-    <LoginContainer>
-    
-         <Form>
-        <input            
-                        data-test="email" 
-                        type="email" 
-                        value={email}
-                        placeholder="Email"
-                        disabled={btnClicked}
-                        required
-                        onChange={e=>setEmail(e.target.value)}
-         ></input>
-         <input 
-                        data-test="password"
-                        type="password"
-                        value={password}
-                        placeholder="Senha"
-                        disabled={btnClicked}
-                        required
-                        onChange={e=>setPassword(e.target.value)}
-         ></input>
-        <StyledButton data-test="login-btn" onClick= {(e)=>login(e)} type="submit">{
-                                    btnClicked ? 
-                                    (<TailSpin
-                                        height="50"
-                                        width="50"
-                                        color="#FFFFFF"
-                                        ariaLabel="tail-spin-loading"
-                                        radius="1"
-                                        wrapperStyle={{}}
-                                        wrapperClass=""
-                                        visible={btnClicked}
-                                />):('Log In')
-                         }</StyledButton>
-      </Form>
-
-      
-      <StyledButton2 to="/timeline" onClick={() => {  generateGuestAccess() }}>
-                    Guest
-        </StyledButton2>
-     
-     <Link to="/sign-up" data-test="sign-up-link">
-        <StyledH2>Gostaria de criar uma conta? Cadastre-se!</StyledH2>
-      </Link>
-
-    </LoginContainer>
-   )
-
-
-
-
-}
-
-const LoginContainer = styled.div `
+const LoginContainer = styled.div`
     display:flex;
     width:30%;
     flex-direction: column;
