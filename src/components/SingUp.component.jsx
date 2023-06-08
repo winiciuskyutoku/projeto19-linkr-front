@@ -74,11 +74,12 @@ export default function SingUpPage() {
                 })
             }catch(err) {
                 console.log (err)
-            }finally{
-            navigate('/')
             }
+            
+                
+          
         }
-
+        navigate('/')
     }
  
 
@@ -123,8 +124,8 @@ export default function SingUpPage() {
                     onChange={e => setPicture(e.target.value)}
                 />
                 <StyledButton
-                    data-test="sign-up-btn"
                     disabled={btnClicked}
+                    data-test="sign-up-btn"
                     onClick={(e) => registerUser(e)}
                     type="submit" > {
                         btnClicked ?
