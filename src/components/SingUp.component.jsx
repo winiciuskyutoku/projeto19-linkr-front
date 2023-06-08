@@ -58,6 +58,7 @@ export default function SingUpPage() {
                             const promise = axios.post(URL, body)
                             promise.then(() => {
                                 alert("usuário Cadastrado com sucesso!")
+                                navigate('/')
         
                             })
                             promise.catch(err => {
@@ -79,7 +80,7 @@ export default function SingUpPage() {
                 
           
         }
-        navigate('/')
+        
     }
  
 
