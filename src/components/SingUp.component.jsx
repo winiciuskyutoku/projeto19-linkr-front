@@ -43,14 +43,13 @@ export default function SingUpPage() {
                 promise.then(response => {
                     console.log ('response',response.data)
                     
-                    if (response.data?.user_email  === userEmail){
+                    if (!response.data?.message){
                         alert("email already registered!")
                         setUserPassword("")
                         setUserName("")
                         setPicture("")
                         setUserEmail("")
                         setBtnClicked(false);
-                        window.location.reload(true)
                     } else {
                         try {
                             setBtnClicked(true);
