@@ -9,6 +9,7 @@ import Hashtags from "../TimelinePage/hashtags";
 import Modal, { ModalProvider, BaseModalBackground } from "styled-react-modal"
 import styled from "styled-components";
 import { StyledTrash } from "../TimelinePage/TimelineStyle";
+import {StyledEditPen} from "../TimelinePage/TimelineStyle";
 
 import { ContainerProfile, UserName, UserPicture, ContainerMain, ContainerPost, FrameNoPost } from "./UserPageStyle";
 import { LoadingCircle, LoadingThreeDots } from "../../components/Loading/Loading";
@@ -100,6 +101,7 @@ export function FancyModalButton({ deletePost, userId, postId }) {
 
     return (
         <div>
+            <StyledEditPen onClick={()=> {alert("edit icon!")}}></StyledEditPen>
             <StyledTrash onClick={toggleModal}></StyledTrash>
             <StyledModal
                 isOpen={isOpen}

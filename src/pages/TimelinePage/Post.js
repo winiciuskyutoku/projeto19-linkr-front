@@ -1,7 +1,10 @@
 
-import { Post, PostContent, Loading, StyledTrash } from "./TimelineStyle"
+import { Post, PostContent, Loading} from "./TimelineStyle"
 import { useNavigate } from "react-router-dom"
 import axios from "axios";
+import { StyledTrash } from "./TimelineStyle";
+import {StyledEditPen} from "./TimelineStyle";
+
 
 export default function TimeLinePost({ postData }) {
     const navigate = useNavigate()
@@ -47,28 +50,41 @@ export default function TimeLinePost({ postData }) {
         <>
             {postData.map(e => {
                 return (
-                    <Post>
-                        <img src={e.user_photo}></img>
-                        <PostContent>
-                            <h1 onClick={() => navigate(`/user-page/${e.user_id}`)}>{e.username}</h1>
-                            <h2
-                                dangerouslySetInnerHTML={{
-                                    __html: e.post_comment.replace(regex, (match) => {
-                                        const hashtag = match.substring(1);
-                                        return `<strong><a href="/hashtag/${hashtag}">#${hashtag}</a></strong>`;
-                                    }),
-                                }}
-                            ></h2>
-                            <div>
+                    <>
+                       
+                        
+                       
+                        <Post>
+                        
+                            <img src={e.user_photo}></img>
+                        
+                            <PostContent>
+                                <h1 onClick={() => navigate(`/user-page/${e.user_id}`)}>{e.username}</h1>
+                            
+                            
+                                <h2
+                                    dangerouslySetInnerHTML={{
+                                        __html: e.post_comment.replace(regex, (match) => {
+                                            const hashtag = match.substring(1);
+                                            return `<strong><a href="/hashtag/${hashtag}">#${hashtag}</a></strong>`;
+                                        }),
+                                    }}
+                                ></h2>
+                            
                                 <div>
-                                    <h2>{e.title}</h2>
-                                    <p>{e.description}</p>
-                                    <a href={e.url} target="_blank">{e.url}</a>
+                                    <div>
+                                        <h2>{e.title}</h2>
+                                        <p>{e.description}</p>
+                                        <a href={e.url} target="_blank">{e.url}</a>
+                                    </div>
+                                    <img src={e.image}></img>
                                 </div>
-                                <img src={e.image}></img>
-                            </div>
-                        </PostContent>
-                    </Post>
+                               
+                            </PostContent>
+                            <StyledTrash/>
+                            <StyledEditPen/>
+                        </Post>
+                    </>
                 )
             })}
         </>

@@ -1,5 +1,6 @@
 import styled from "styled-components"
 import {BsFillTrashFill} from "react-icons/bs"
+import {BsPencilSquare} from  "react-icons/bs"
 
 export const TimelineContainer = styled.section`
   margin-top:72px;
@@ -342,4 +343,11 @@ export const StyledTrash = styled(BsFillTrashFill)`
   width: 20px;
   height: 20px;
   right: 18px;
+`
+export const StyledEditPen = styled(BsPencilSquare)`
+    color: white;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    right: 55px;
 `
