@@ -29,31 +29,35 @@ export default function SingUpPage() {
 
                 const body = { name: userName, email: userEmail, password: userPassword, image: picture }
                 
-                    const require =  axios.post(URL, body)
-                    require.then(()=>{
+                    const promise =  axios.post(URL, body)
+                    promise.then(()=>{
                         alert("usuário Cadastrado com sucesso!")
                         setBtnClicked(false)
                         
-                    }                    )
-                    require.catch(err => {
-                        setBtnClicked(false)
-                        console.log(err.message)
-                        {err.response.message === 409 && alert("email or username already registered/")}
-
+                    }     )
+                    promise.catch(err => {
+                        if (err.response.status === 409) {
+                             setBtnClicked(false)
+                             alert("email already registered!")
+                             window.location.reload(true);
+                        }
+                       
+                        console.log (err)
+                       
+                       
+            
                     })
                        
             } catch (error) {
+             
                     console.log(error)
-            } finally {
+            }  finally {
                 navigate('/')
             }
+
+             
             
-            
 
-
-              
-
-          
         } else {
             alert("formato de email invalido!")
         }
