@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState , useEffect} from "react";
 import { useNavigate } from "react-router-dom"
 import { TailSpin } from 'react-loader-spinner'
 import styled from "styled-components";
@@ -17,9 +17,16 @@ export default function LoginPage(){
     const [password, setPassword] = useState("")
     const navigate = useNavigate();
     const [btnClicked, setBtnClicked] = useState (false)
+    const token = JSON.parse(localStorage.getItem("user"))?.user_token;
    
+   
+    useEffect(() => {
+        if (token) {
+          navigate("/timeline");
+        }
+      }, [navigate, token]);
 
-    
+
 
 
     function login(e){
@@ -33,8 +40,6 @@ export default function LoginPage(){
         console.log(body);
         const promise= axios.post(URL , body)
         promise.then(res=>{
-            console.log(res.data)
-           
             const {user_id , username, user_photo, user_token} = res.data
             localStorage.setItem("user" , JSON.stringify({user_id:user_id , username:username, user_photo:user_photo, user_token:user_token}))
             localStorage.setItem('user_token', user_token)

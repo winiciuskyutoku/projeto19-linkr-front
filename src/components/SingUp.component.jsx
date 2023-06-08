@@ -15,14 +15,13 @@ export default function SingUpPage() {
     const [picture, setPicture] = useState("")
 
     const navigate = useNavigate();
-    async function registerUser(e) {
+  function registerUser(e) {
 
         if (emailRegex.test(userEmail)) {
             if(userPassword.length < 6){
                 return alert("Senha que ter no minimo 6 caracteres!")
             }
-
-            
+            try {
                 e.preventDefault()
                 setBtnClicked(true);
 
@@ -30,20 +29,26 @@ export default function SingUpPage() {
 
                 const body = { name: userName, email: userEmail, password: userPassword, image: picture }
                 
-                    const require = await axios.post(URL, body)
-                    require.then(res => {
+                    const require =  axios.post(URL, body)
+                    require.then(()=>{
                         alert("usuário Cadastrado com sucesso!")
                         setBtnClicked(false)
-                        navigate("/")
-
-                    })
+                        
+                    }                    )
                     require.catch(err => {
                         setBtnClicked(false)
                         console.log(err.message)
                         {err.response.message === 409 && alert("email or username already registered/")}
 
                     })
-                    
+                       
+            } catch (error) {
+                    console.log(error)
+            } finally {
+                navigate('/')
+            }
+            
+            
 
 
               
