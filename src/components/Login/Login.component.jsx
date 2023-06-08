@@ -50,9 +50,11 @@ export default function LoginPage() {
                                         localStorage.setItem('user_token', user_token)
                                         setUser({ user_id: user_id, username: username, user_photo: user_photo, user_token: user_token })
                                         navigate("/timeline")
+                                    
                                     })
                                     promise.catch(err => {
-                                        console.log(err.response.message)
+                                        alert(err.response.data.message)
+                                        window.location.reload(true)
                                     })
                         } else {
                             alert("email não cadastrado!")
@@ -66,10 +68,14 @@ export default function LoginPage() {
         
                     promise.catch(err => {
                         alert("internal system error")
+                        alert(err.response.data.message)
+                        window.location.reload(true)
                     })
                 }catch(err){
                     alert("internal system error")
-                }   
+                }
+                 
+                
 
 
         }   else {
@@ -78,6 +84,7 @@ export default function LoginPage() {
             setEmail("")
             setPassword("")
         }
+        
     }
 
     const generateGuestAccess = () => {
