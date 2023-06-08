@@ -17,7 +17,8 @@ export default function SingUpPage() {
 
 
     function registerUser(e) {
-
+        e.preventDefault()
+        console.log(emailRegex.test(userEmail))
         if (userPassword.length < 6 || !emailRegex.test(userEmail)) {
             if(!emailRegex.test(userEmail)){
                 alert("email em formato invalido!")
@@ -35,27 +36,30 @@ export default function SingUpPage() {
         } else {
 
             try {
+
                 const URL = `${process.env.REACT_APP_RENDER_URL}/sign-up/${userEmail}`
                 const promise = axios.get(URL)
-                promise.then((response) => {
-                    if (response.data.user_email  === userEmail){
+                
+                promise.then(response => {
+                    console.log ('response',response.data)
+                    
+                    if (response.data?.user_email  === userEmail){
                         alert("email already registered!")
                         setUserPassword("")
                         setUserName("")
                         setPicture("")
                         setUserEmail("")
                         setBtnClicked(false);
-                       
+                        window.location.reload(true)
                     } else {
                         try {
                             setBtnClicked(true);
-                            e.preventDefault()
+                        
         
                             const URL = `${process.env.REACT_APP_RENDER_URL}/sign-up`
-        
                             const body = { name: userName, email: userEmail, password: userPassword, image: picture }
-        
                             const promise = axios.post(URL, body)
+
                             promise.then(() => {
                                 alert("usuário Cadastrado com sucesso!")
                                 navigate('/')
