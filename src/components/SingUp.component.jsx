@@ -10,68 +10,84 @@ export default function SingUpPage() {
     const [btnClicked, setBtnClicked] = useState(false)
     const [userEmail, setUserEmail] = useState("")
     const [userPassword, setUserPassword] = useState("")
-    const [confirmPwd, setConfirmPwd] = useState("")
     const [userName, setUserName] = useState("")
     const [picture, setPicture] = useState("")
-
+    const [emailRegistered, setEmailRegistered] = useState(false);
     const navigate = useNavigate();
-  function registerUser(e) {
 
-        if (emailRegex.test(userEmail)) {
-            if(userPassword.length < 6){
-                return alert("Senha que ter no minimo 6 caracteres!")
+
+    function registerUser(e) {
+
+        if (userPassword.length < 6 || !emailRegex.test(userEmail)) {
+            if(!emailRegex.test(userEmail)){
+                alert("email em formato invalido!")
+            } 
+            if ( userPassword.length < 6 ){
+                alert("Senha que ter no minimo 6 caracteres!")
             }
-            try {
-                e.preventDefault()
-                setBtnClicked(true);
-
-                const URL = `${process.env.REACT_APP_RENDER_URL}/sign-up`
-
-                const body = { name: userName, email: userEmail, password: userPassword, image: picture }
-                
-                    const promise =  axios.post(URL, body)
-                    promise.then(()=>{
-                        alert("usuário Cadastrado com sucesso!")
-                        setBtnClicked(false)
-                        
-                    }     )
-                    promise.catch(err => {
-                        if (err.response.status === 409) {
-                             setBtnClicked(false)
-                             alert("email already registered!")
-                             window.location.reload(true);
-                        }
-                       
-                        console.log (err)
-                       
-                       
-            
-                    })
-                       
-            } catch (error) {
-             
-                    console.log(error)
-            }  finally {
-                navigate('/')
-            }
-
-             
-            
+         
+            setUserPassword("")
+            setUserName("")
+            setPicture("")
+            setUserEmail("")
+            setBtnClicked(false);
 
         } else {
-            alert("formato de email invalido!")
+
+            try {
+                const URL = `${process.env.REACT_APP_RENDER_URL}/sign-up/${userEmail}`
+                const promise = axios.get(URL)
+                promise.then((response) => {
+                    if (response.data.user_email  === userEmail){
+                        alert("email already registered!")
+                        setUserPassword("")
+                        setUserName("")
+                        setPicture("")
+                        setUserEmail("")
+                        setBtnClicked(false);
+                       
+                    } else {
+                        try {
+                            setBtnClicked(true);
+                            e.preventDefault()
+        
+                            const URL = `${process.env.REACT_APP_RENDER_URL}/sign-up`
+        
+                            const body = { name: userName, email: userEmail, password: userPassword, image: picture }
+        
+                            const promise = axios.post(URL, body)
+                            promise.then(() => {
+                                alert("usuário Cadastrado com sucesso!")
+        
+                            })
+                            promise.catch(err => {
+                                if (err.response.status === 409) {
+                                    setBtnClicked(false)
+                                    alert("email already registered!")
+                                }
+        
+                            })
+                      }  catch(err) {
+                        console.log (err)
+                     }
+                    }
+                })
+            }catch(err) {
+                console.log (err)
+            }finally{
+            navigate('/')
+            }
         }
 
-
-
     }
+ 
 
     return (
         <>
 
             <Form>
                 <input
-                     data-test="username" 
+                    data-test="username"
                     type="text"
                     value={userName}
                     placeholder="username"
@@ -80,7 +96,7 @@ export default function SingUpPage() {
                     onChange={e => setUserName(e.target.value)}
                 ></input>
                 <input
-                     data-test="email" 
+                    data-test="email"
                     type="email"
                     value={userEmail}
                     placeholder="Email"
@@ -89,7 +105,7 @@ export default function SingUpPage() {
                     onChange={e => setUserEmail(e.target.value)}
                 ></input>
                 <input
-                    data-test="password" 
+                    data-test="password"
                     type="password"
                     value={userPassword}
                     placeholder="Senha"
@@ -97,8 +113,8 @@ export default function SingUpPage() {
                     required
                     onChange={e => setUserPassword(e.target.value)}
                 ></input>
-                <input  
-                    data-test="picture-url" 
+                <input
+                    data-test="picture-url"
                     type="url"
                     value={picture}
                     placeholder="Url da foto"
@@ -107,9 +123,9 @@ export default function SingUpPage() {
                     onChange={e => setPicture(e.target.value)}
                 />
                 <StyledButton
-                     data-test="sign-up-btn" 
-                     disabled={btnClicked}
-                     onClick={(e) => registerUser(e)}
+                    data-test="sign-up-btn"
+                    disabled={btnClicked}
+                    onClick={(e) => registerUser(e)}
                     type="submit" > {
                         btnClicked ?
                             (<TailSpin
