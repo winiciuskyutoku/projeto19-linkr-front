@@ -36,7 +36,7 @@ export function LoadingThreeDots() {
             height="20"
             width="20"
             radius="6"
-            color="#ccac00"
+            color="#001a18"
             ariaLabel="loading"
             background-color="transparent"
         />);

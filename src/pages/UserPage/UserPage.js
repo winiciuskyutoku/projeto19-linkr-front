@@ -3,20 +3,20 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 import Header from "../../components/Header/Header";
-import { StyledH2 } from "../TimelinePage/TimelineStyle";
 import FramePosts from "../../components/FramePost/FramePosts";
+import User from "./User";
 import Hashtags from "../TimelinePage/hashtags";
 import Modal, { ModalProvider, BaseModalBackground } from "styled-react-modal"
 import styled from "styled-components";
 import { StyledTrash } from "../TimelinePage/TimelineStyle";
 
-import { ContainerProfile, UserName, UserPicture, ContainerMain, ContainerPost, FrameNoPost } from "./UserPageStyle";
+import { ContainerProfile, ContainerMain, ContainerPost, FrameNoPost, LoadingContainer } from "./UserPageStyle";
 import { LoadingCircle, LoadingThreeDots } from "../../components/Loading/Loading";
 
 export default function UserPage() {
     const [userProfile, setUserProfile] = useState(null);
     const [likesPosts, setLikesPosts] = useState(null);
-    const [reload, setReload] = useState(false);
+    const [realoadUser, setReloadUser] = useState(false);
 
     const { id } = useParams();
     const user = JSON.parse(localStorage.getItem("user"));
@@ -25,13 +25,12 @@ export default function UserPage() {
         const url = `${process.env.REACT_APP_RENDER_URL}/profile-user/${id}`;
 
         axios.get(url).then((sucess) => {
-            console.log(sucess.data)
             setUserProfile(sucess.data.profile);
             setLikesPosts(sucess.data.likes);
         }).catch((error) => {
             console.log(error.response);
         });
-    }, [reload, id]);
+    }, [realoadUser, id]);
 
     function deletePost(id, user_id, toggleModal) {
         const lsUser = JSON.parse(localStorage.getItem('user'))
@@ -49,23 +48,20 @@ export default function UserPage() {
             <ModalProvider backgroundComponent={FadingBackground}>
                 <Header />
                 <ContainerProfile>
-                    <UserName>
-                        <UserPicture>
-                            {userProfile ? <img src={userProfile[0].user_photo} alt="" /> : ''}
-                        </UserPicture>
-                        <StyledH2>{userProfile ? `${userProfile[0].username}'s posts` : ''}</StyledH2>
-                    </UserName>
+                    {userProfile && <User profile={userProfile[0]} user={user}/>}
                     <ContainerMain>
                         <ContainerPost>
                             {userProfile ?
                                 userProfile[0].post_id !== null ?
-                                    userProfile.map((p) => <FramePosts key={p.post_id} p={p} likes={likesPosts} user={user} setReload={setReload} deletePost={deletePost} postId={userProfile[0].post_id} userId={id}/> )
+                                    userProfile.map((p) => <FramePosts key={p.post_id} p={p} likes={likesPosts} user={user} deletePost={deletePost} postId={userProfile[0].post_id} userId={id} setReloadUser={setReloadUser}/>)
                                     :
                                     <FrameNoPost>
                                         <h1>Ainda não há postagens</h1>
                                     </FrameNoPost>
                                 :
-                                <LoadingThreeDots />
+                                <LoadingContainer>
+                                    <LoadingCircle />
+                                </LoadingContainer>
                             }
                         </ContainerPost>
                         <Hashtags />

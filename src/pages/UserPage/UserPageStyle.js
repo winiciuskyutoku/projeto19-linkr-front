@@ -22,7 +22,7 @@ export const ContainerProfile = styled.div`
 export const ContainerMain = styled.div`
     width: 100%;
     padding: 0 10%;
-    margin-top: 1%;
+    margin-top: 3%;
     display: flex;
     /* align-items: center; */
     justify-content: space-between;
@@ -34,17 +34,32 @@ export const ContainerPost = styled.div`
     align-items: center;
 `;
 export const UserPicture = styled.div`
-    width: 70px;
-    height: 70px;
-    margin-left: 10px;
-    border: solid 1px rgba(255, 255, 255, 0.5);
-    border-radius: 60px;
-    cursor: pointer;
-    overflow: auto;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
     img{
-        width: 100%;
-        height: 100%;
+        width: 70px;
+        height: 70px;
+        border: solid 1px rgba(255, 255, 255, 0.5);
+        border-radius: 60px;
+        cursor: pointer;
         object-fit: cover;
+    }
+    p{
+        font-family: 'Oswald';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 43px;
+        color: #FFFFFF;
+        margin-left: 2%;
+
+        @media (max-width:611px) {
+            font-size: 33px;
+            line-height: 49px;
+            margin-left:17px;
+        }
     }
 `;
 export const UserName = styled.div`
@@ -54,6 +69,7 @@ export const UserName = styled.div`
     display: flex;
     align-items: center;
     justify-content: flex-start;
+    z-index: 2;
 `;
 export const FrameNoPost = styled.div`
     width: 100%;
@@ -68,4 +84,33 @@ export const FrameNoPost = styled.div`
         font-size: 32px;
         font-style: italic;
     }
+`;
+export const LoadingContainer = styled.div`
+    width: 100%;
+    padding: 0 10%;
+    margin-top: 40%;
+    display: flex;
+    justify-content: center;
+`;
+export const FollowButton = styled.button`
+    width: 10%;
+    height: 25px;
+    margin-left: 5%;
+    background-color: ${({state}) => state ? "#f1f8ff" : "#0000fa"};
+    font-family: 'Roboto', sans-serif;
+    color: ${({state}) => state ? "#001a18" : "#f1f8ff"};
+    font-weight: 400;
+    cursor: pointer;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 5px;
+    border: none;
+    :hover{
+        color: ${({state}) => state ? "#f1f8ff" : "#001a18"};;
+        background-color: ${({state}) => state ? "#0000fa" : "#f1f8ff"};
+    }
+    
 `;
