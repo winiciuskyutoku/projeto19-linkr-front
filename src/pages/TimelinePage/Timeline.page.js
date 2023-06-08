@@ -7,6 +7,8 @@ import axios from "axios"
 import { ContainerContent, StyledH2, TimelineContainer, TitleContainer } from "./TimelineStyle"
 import Hashtags from "./hashtags"
 import GuestContextHook from "../../hooks/GuestContext.Hook.jsx"
+import NewPostsAlert from "./NewPostsAlert"
+import dayjs from "dayjs"
 
 export default function TimelinePage() {
   const {guest} = GuestContextHook();
@@ -16,7 +18,9 @@ export default function TimelinePage() {
   const [displayDiv, setDisplayDiv] = useState(false);
   const [postData, setPostData] = useState(null)
   const exist = JSON.parse(localStorage.getItem("user")).user_token
+  const [ date, setDate] = useState()
   useEffect(() => {
+    setDate(dayjs().format('YYYY-MM-DD HH:mm:ss'))
     axios.get(`${process.env.REACT_APP_RENDER_URL}/get-posts`)
     .then(sucess => setPostData(sucess.data))
     .catch(fail => setPostData(fail.code))
@@ -53,6 +57,7 @@ export default function TimelinePage() {
       </TitleContainer>
       <ContainerContent>
         <Publish att={att} setAtt={setAtt} exist={exist}/>
+        <NewPostsAlert exist={exist} date={date}/>
         <TimeLinePost postData={postData}></TimeLinePost>
       </ContainerContent>
     </TimelineContainer>
