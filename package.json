@@ -11,7 +11,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.4.0",
     "cheerio": "^1.0.0-rc.12",
-    "dayjs": "^1.11.7",
+    "dayjs": "^1.11.8",
     "dotenv": "^16.1.4",
     "react": "^18.2.0",
     "react-debounce-input": "^3.3.0",
@@ -51,4 +51,3 @@
     ]
   }
 }
-
