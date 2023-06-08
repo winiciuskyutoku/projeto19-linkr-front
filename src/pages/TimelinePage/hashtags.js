@@ -33,7 +33,7 @@ export default function Hashtags({ displayDiv, att, exist }) {
                     <h2>trending</h2>
                 </HashtagTitle>
                 {hashtags.map((h) =>
-                    <Link data-test='hashtag' to={`/hashtag/${h.hashtag_tag.replace('#', '')}`} key={h.hashtag_id}>{h.hashtag_tag}</Link>)}
+                    <Link key={h.hashtag_tag} data-test='hashtag' to={`/hashtag/${h.hashtag_tag.replace('#', '')}`} >{h.hashtag_tag}</Link>)}
             </ContainerHashtags>
         </BackHashtag>
     )

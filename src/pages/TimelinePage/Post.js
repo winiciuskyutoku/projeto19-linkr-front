@@ -47,7 +47,7 @@ export default function TimeLinePost({ postData }) {
         <>
             {postData.map(e => {
                 return (
-                    <Post>
+                    <Post key={e.post_id}>
                         <img src={e.user_photo}></img>
                         <PostContent>
                             <h1 onClick={() => navigate(`/user-page/${e.user_id}`)}>{e.username}</h1>
