@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { CommentInput, LinkInput, PublishButton, PublishContainer, PublishTitle } from "./TimelineStyle";
 import axios from "axios";
-export default function Publish({ setAtt, att, exist, config }) {
+import { exist, config, userImage } from "../../constants/constants";
+export default function Publish({ setAtt, att}) {
     const [post_link, setPost_link] = useState()
     const [post_comment, setPost_comment] = useState()
     const [disable, setDisable] = useState(false)
-    const userImage = JSON.parse(localStorage.getItem("user")).user_photo
     console.log(exist==='guest_token')
     
     const body = { post_comment, post_link }

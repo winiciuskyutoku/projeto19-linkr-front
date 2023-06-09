@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { BackHashtag, ContainerHashtags, HashtagTitle } from "./TimelineStyle";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { exist } from "../../constants/constants";
 
-export default function Hashtags({ displayDiv, att, exist }) {
+export default function Hashtags({ displayDiv, att }) {
     const [hashtags, setHashtags] = useState([])
     useEffect(() => {
         axios.get(`${process.env.REACT_APP_RENDER_URL}/hashtags`)
