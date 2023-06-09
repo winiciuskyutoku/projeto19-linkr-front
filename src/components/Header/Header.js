@@ -11,14 +11,17 @@ export default function Header() {
     const [filteredProfiles, setFilteredProfiles] = useState([]);
     const userRef = useRef(null);
     const researchRef = useRef(null);
-    const userImage = JSON.parse(localStorage.getItem("user")).user_photo;
+    const user = JSON.parse(localStorage.getItem("user"));
     const navigate = useNavigate();
 
     function research(e) {
         setSearchValue(e.target.value);
         if(e.target.value.length<3) return;
 
-        const url = `${process.env.REACT_APP_RENDER_URL}/get-users`;
+        const url = user.user_token !== 'guest_token' ? 
+        `${process.env.REACT_APP_RENDER_URL}/get-users?user=${user.user_id}`
+        : `${process.env.REACT_APP_RENDER_URL}/get-users`;
+
         const body = { search: e.target.value };
 
         axios.post(url, body).then((sucess) => {
@@ -85,6 +88,7 @@ export default function Header() {
                             }} data-test="user-search">
                                 <img src={profile.user_photo} alt="" />
                                 <p>{profile.username}</p>
+                                <h2>{profile.following && '● following'}</h2>
                             </Item>
                         ))}
                     </ul>
@@ -94,12 +98,12 @@ export default function Header() {
                 arrowActive ?
                     <User ref={userRef}>
                         <ArrowUp onClick={() => setArrowActive(false)} />
-                        <img data-test="avatar" src={userImage} alt="" onClick={() => setArrowActive(false)}/>
+                        <img data-test="avatar" src={user.user_photo} alt="" onClick={() => setArrowActive(false)}/>
                     </User>
                     :
                     <User ref={userRef}>
                         <ArrowDown onClick={(e) => active(e)} />
-                        <img data-test="avatar" src={userImage} alt="" onClick={(e) => active(e)}/>
+                        <img data-test="avatar" src={user.user_photo} alt="" onClick={(e) => active(e)}/>
                     </User>
 
             }
@@ -144,5 +148,14 @@ const Item = styled.li`
         margin-right: 3%;
         border: solid 1px rgba(0, 0, 0, 0.3);
         object-fit: cover;
+    }
+    p{
+        font-size: 18px;
+        color: #2c2c2c;
+    }
+    h2{
+        margin-left: 2%;
+        color: #d3d3d3;
+        font-size: 15px;
     }
 `
