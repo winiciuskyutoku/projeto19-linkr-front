@@ -29,6 +29,7 @@ export default function TimelinePage() {
   }, [att, date])
 
   function loadPosts(){
+    console.log(hasMore)
     if (exist === 'guest_token') {
       axios.get(`${process.env.REACT_APP_RENDER_URL}/get-posts/${page}`)
         .then(sucess => {
@@ -36,7 +37,7 @@ export default function TimelinePage() {
           newData ? setPostData(prevData => prevData.concat(sucess.data)) : setPostData(sucess.data)
           const newPage = page+10
           setPage(newPage)
-          setHasMore(newData.length > 0)
+          setHasMore(sucess.data.length > 0)
         })
         .catch(fail => {
           console.log(fail.code)
@@ -82,7 +83,7 @@ export default function TimelinePage() {
   return (
     <InfiniteScroll
       pageStart={0}
-      loadMore={loadPosts}
+      loadMore={hasMore?loadPosts:""}
       hasMore={hasMore}
       loader={<Carregando key={0}>loading...</Carregando>}
     >
