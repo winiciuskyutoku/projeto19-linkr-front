@@ -6,7 +6,21 @@ import axios from "axios";
 export default function TimeLinePost({ postData, isLoading }) {
     const navigate = useNavigate()
     const regex = /#([a-zA-Z0-9\/\-_]+)/g
-    console.log(postData)
+    console.log('aqui',postData?postData[0].following==0:null)
+
+    if (postData&&postData[0].following==0) {
+        return(
+        <Loading>
+            You don't follow anyone yet. Search for new friends!
+        </Loading>
+        )
+    }else if(postData&&!postData[0].post_id){
+        return(
+        <Loading>
+            No posts found from your friends
+        </Loading>
+        )
+    }
 
     if (typeof (postData) == 'string') {
         return (
