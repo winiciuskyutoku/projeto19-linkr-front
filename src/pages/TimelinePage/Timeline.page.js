@@ -4,12 +4,14 @@ import Publish from "./Publish"
 import TimeLinePost from "./Post"
 import { useEffect } from "react"
 import axios from "axios"
-import { ContainerContent, StyledH2, TimelineContainer, TitleContainer } from "./TimelineStyle"
+import { Carregando, ContainerContent, StyledH2, TimelineContainer, TitleContainer } from "./TimelineStyle"
 import Hashtags from "./hashtags"
 import GuestContextHook from "../../hooks/GuestContext.Hook.jsx"
 import NewPostsAlert from "./NewPostsAlert"
 import dayjs from "dayjs"
 import { exist, config } from "../../constants/constants"
+import transformeDate from "./transformDate"
+import InfiniteScroll from "react-infinite-scroller"
 
 export default function TimelinePage() {
   const { guest } = GuestContextHook();
@@ -19,58 +21,41 @@ export default function TimelinePage() {
   const [displayDiv, setDisplayDiv] = useState(false);
   const [postData, setPostData] = useState(null)
   const [date, setDate] = useState()
-  const [last_atualization, setLast_atualization] = useState(dayjs().format('YYYY-MM-DD HH:mm:ss'))
-  const [isLoading, setIsLoading] = useState(false)
-
-  function isPageBottom() {
-    return (
-      window.innerHeight + document.documentElement.scrollTop ===
-      document.documentElement.offsetHeight
-    );
-  }
+  const [page, setPage] = useState(0)
+  const [hasMore, setHasMore] = useState(true)
 
   useEffect(() => {
-    setIsLoading(true)
-    if (exist === 'guest_token') {
-      console.log('oi')
-      axios.get(`${process.env.REACT_APP_RENDER_URL}/get-posts/${last_atualization}`)
-        .then(sucess => {
-          const newData = postData
-          newData?setPostData([...newData, sucess.data]):setPostData(sucess.data)
-          setLast_atualization(sucess.data[4].created_at)
-          setIsLoading(false)
-        })
-        .catch(fail => {
-          setPostData(fail.code)
-          setIsLoading(false)
-        })
-    } else {
-      axios.get(`${process.env.REACT_APP_RENDER_URL}/get-posts-login${last_atualization}`, config)
-        .then(sucess => {
-          const newData = postData
-          newData?setPostData([...newData, sucess.data]):setPostData(sucess.data)
-          setLast_atualization(sucess.data[4].created_at)
-          setIsLoading(false)
-        })
-        .catch(fail => {
-          setPostData(fail.code)
-          setIsLoading(false)
-        })
-    }
+    loadPosts()
   }, [att, date])
 
-  useEffect(() => {
-    function handleScroll() {
-      if (isPageBottom() && !isLoading) {
-        setAtt(a=>!a)
-      }
+  function loadPosts(){
+    if (exist === 'guest_token') {
+      axios.get(`${process.env.REACT_APP_RENDER_URL}/get-posts/${page}`)
+        .then(sucess => {
+          const newData = postData
+          newData ? setPostData(prevData => prevData.concat(sucess.data)) : setPostData(sucess.data)
+          const newPage = page+10
+          setPage(newPage)
+          setHasMore(newData.length > 0)
+        })
+        .catch(fail => {
+          console.log(fail.code)
+        })
+    } else {
+      axios.get(`${process.env.REACT_APP_RENDER_URL}/get-posts-login/${page}`, config)
+        .then(sucess => {
+          console.log(sucess.data)
+          const newData = postData
+          newData ? setPostData(prevData => prevData.concat(sucess.data)) : setPostData(sucess.data)
+          const newPage = page+10
+          setPage(newPage)
+          setHasMore(newData.length > 0)
+        })
+        .catch(fail => {
+          console.log(fail.code)
+        })
     }
-
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [isLoading])
+  }
 
   let initialX = null;
 
@@ -95,17 +80,25 @@ export default function TimelinePage() {
   }
 
   return (
-    <TimelineContainer onClick={() => setDisplayDiv(false)} onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
-      <Header />
-      <Hashtags displayDiv={displayDiv} att={att} />
-      <TitleContainer>
-        <StyledH2>timeline</StyledH2>
-      </TitleContainer>
-      <ContainerContent>
-        <Publish att={att} setAtt={setAtt} />
-        <NewPostsAlert date={date} setDate={setDate} setLast_atualization={setLast_atualization} />
-        <TimeLinePost postData={postData} isLoading={isLoading}></TimeLinePost>
-      </ContainerContent>
-    </TimelineContainer>
+    <InfiniteScroll
+      pageStart={0}
+      loadMore={loadPosts}
+      hasMore={hasMore}
+      loader={<Carregando key={0}>loading...</Carregando>}
+    >
+      <TimelineContainer onClick={() => setDisplayDiv(false)} onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
+        <Header />
+        <Hashtags displayDiv={displayDiv} att={att} />
+        <TitleContainer>
+          <StyledH2>timeline</StyledH2>
+        </TitleContainer>
+        <ContainerContent>
+          <Publish att={att} setAtt={setAtt} />
+          <NewPostsAlert date={date} setDate={setDate} setPostData={setPostData} />
+          <TimeLinePost postData={postData} ></TimeLinePost>
+        </ContainerContent>
+      </TimelineContainer>
+    </InfiniteScroll>
   )
 }
+

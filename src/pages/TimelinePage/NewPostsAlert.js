@@ -6,8 +6,9 @@ import { BsArrowCounterclockwise } from "react-icons/bs"
 import styled from "styled-components"
 import useInterval from "use-interval"
 import { exist } from "../../constants/constants"
+import transformeDate from "./transformDate"
 
-export default function NewPostsAlert({ date, setDate, setLast_atualization }) {
+export default function NewPostsAlert({ date, setDate, setLast_atualization, last_atualization, setIsLoading, setPostData }) {
     const [newPosts, setNewPosts] = useState(0)
     const config = { headers: { Authorization: `Bearer ${localStorage.getItem('user_token')}` } }
 
@@ -16,8 +17,20 @@ export default function NewPostsAlert({ date, setDate, setLast_atualization }) {
     }, [])
 
     function atualizeDate() {
-        setDate(dayjs().format('YYYY-MM-DD HH:mm:ss'))
-        setLast_atualization(dayjs().format('YYYY-MM-DD HH:mm:ss'))
+        setIsLoading(true)
+        axios.get(`${process.env.REACT_APP_RENDER_URL}/get-posts-login/${last_atualization}`, config)
+        .then(sucess => {
+          setPostData(sucess.data)
+          if (sucess.data.length > 0) {
+            setLast_atualization(transformeDate(sucess.data[4].created_at))
+          }
+          setIsLoading(false)
+        })
+        .catch(fail => {
+          console.log(fail)
+          setPostData(fail)
+          setIsLoading(false)
+        })
     }
     useInterval(() => {
         if (localStorage.getItem('user_token') !== 'guest_token') {
