@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import {BsFillTrashFill} from "react-icons/bs"
+import { BsFillTrashFill } from "react-icons/bs"
 
 export const TimelineContainer = styled.section`
   margin-top:72px;
@@ -59,7 +59,7 @@ box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 border-radius: 16px;
 width:611px;
 height:210px;
-display:${props=>props.exist==='guest_token'?'none':'flex'};
+display:${props => props.exist === 'guest_token' ? 'none' : 'flex'};
 flex-direction:column;
 padding:21px 22px 16px 87px;
 box-sizing:border-box;
@@ -270,7 +270,7 @@ export const Loading = styled.div`
 } */
 
 export const ContainerHashtags = styled.div`
-display:${props=>props.exist==='guest_token'?'none':'flex'};
+display:${props => props.exist === 'guest_token' ? 'none' : 'flex'};
 background: #171717;
 border-radius: 16px;
 width:301px;
@@ -297,13 +297,13 @@ a{
   right:5px;
 }
 @media (max-width: 937px) {
-  display:${props=>props.displayDiv&&props.exist!=='guest_token'?'flex':'none'};
+  display:${props => props.displayDiv && props.exist !== 'guest_token' ? 'flex' : 'none'};
   z-index:100;
   top:100px;
 }
 `
 export const BackHashtag = styled.div`
-display:${props=>props.exist!=='guest_token'?'flex':'none'};
+display:${props => props.exist !== 'guest_token' ? 'flex' : 'none'};
 position:fixed;
 top:72px;
 right:0;
@@ -313,7 +313,7 @@ z-index:1;
 @media (max-width: 937px) {
   background-color:black;
   opacity:0.95;
-  display:${props=>props.displayDiv&&props.exist!=='guest_token'?'flex':'none'};
+  display:${props => props.displayDiv && props.exist !== 'guest_token' ? 'flex' : 'none'};
 }
 `
 
@@ -342,4 +342,13 @@ export const StyledTrash = styled(BsFillTrashFill)`
   width: 20px;
   height: 20px;
   right: 18px;
+`
+
+export const Carregando = styled.div`
+background-color:#333;
+color: white;
+font-size: 25px;
+width: 100%;
+display: flex;
+justify-content: center;
 `

@@ -45,7 +45,7 @@ export default function TimeLinePost({ postData, isLoading }) {
 
     return (
         <>
-            {postData.map(e => {
+            {postData?.map(e => {
                 return (
                     <Post key={e.post_id}>
                         <img src={e.user_photo}></img>
